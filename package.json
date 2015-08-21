@@ -1,0 +1,34 @@
+{
+  "name": "tiaosao_app",
+  "version": "0.0.1",
+  "description": "A test version of the web site TiaoSao",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crystalcloud007/TiaosaoApp.git"
+  },
+  "keywords": [
+    "web",
+    "site"
+  ],
+  "author": "ZHR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crystalcloud007/TiaosaoApp/issues"
+  },
+  "homepage": "https://github.com/crystalcloud007/TiaosaoApp#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "jsonwebtoken": "^5.0.4",
+    "mongoose": "^4.1.3",
+    "morgan": "^1.6.1",
+    "multer": "^1.0.3",
+    "serve-favicon": "^2.3.0"
+  }
+}
