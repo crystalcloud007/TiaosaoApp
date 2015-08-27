@@ -26,10 +26,12 @@ app.use(express.static(__dirname + '/views'));
 
 // APP apis
 var user_api = require('./routes/api_user')(app ,express);
+var general_api = require('./routes/api_general')(app, express);
 //var entry_api = require('./routes/api_entry')(app, express);
 //var admin_api = require('./routes/api_admin')(app, express);
 
 app.use('/api/user', user_api);
+app.use('/api/gen', general_api);
 //app.use('/api/entry', entry_api);
 //app.use('/api/admin', admin_api);
 

@@ -15,6 +15,8 @@ var UserSchema = new Schema(
         email:{type: String, default:''},
         desc:{type:String, default:''},
         level:Number,
+        credit:{type:Number, default:5},                    // 信用值，每日发帖总个数
+        active:{type:Boolean, default:false},
         verified: {type: Boolean, default: false},
         frozen: {type: Boolean, default: false},
         //posts_count_today: {type:Number, default:0},      // 发帖次数，移动到USER LOG中

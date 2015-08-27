@@ -21,7 +21,7 @@ angular.module('AuthService',[])
             {
                 $window.localStorage.removeItem('token');
             }
-        }
+        };
 
         return ATFac;
     })
@@ -31,7 +31,7 @@ angular.module('AuthService',[])
 
         AF.login = function(username, password)
         {
-            $http.post('/api/user/signup', {username:username, password:password})
+            $http.post('/api/user/login', {username:username, password:password})
                 .success(function(data)
                 {
                     AuthToken.setToken(data.token);
@@ -92,7 +92,7 @@ angular.module('AuthService',[])
                 config.headers["x-access-token"] = token;
             }
             return config;
-        }
+        };
 
         interceptor.responseError = function(response)
         {
@@ -101,7 +101,7 @@ angular.module('AuthService',[])
                 $location.path("/login");
             }
             return $q.reject(response);
-        }
+        };
 
         return interceptor;
     });

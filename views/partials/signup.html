@@ -1,0 +1,136 @@
+<div class="container">
+    <div ng-if="Signup.signup_err" class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Signup.signup_err_msg}}</strong>
+    </div>
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active" ng-if="Signup.current_block_email">
+            <a href="javascript:void(0)">邮箱注册</a>
+        </li>
+        <li role="presentation" ng-if="!Signup.current_block_email">
+            <a href="javascript:void(0)" ng-click="Signup.switchToEmail()">邮箱注册</a>
+        </li>
+        <li role="presentation" class="active" ng-if="Signup.current_block_phone">
+            <a href="javascript:void(0)">手机注册</a>
+        </li>
+        <li role="presentation"  ng-if="!Signup.current_block_phone">
+            <a href="javascript:void(0)" ng-click="Signup.switchToPhone()">手机注册</a>
+        </li>
+    </ul>
+    <hr/>
+</div>
+<div class="container">
+    <form class="form-horizontal" ng-if="Signup.current_block_email">
+        <fieldset>
+            <!--legend>邮箱注册</legend-->
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_username">邮箱地址：</label>
+                <div class="col-md-4">
+                    <input id="signup_username" type="text" ng-model="Signup.username_email" ng-click="Signup.touchUEmail()"
+                           ng-blur="Signup.checkUEmail()" placeholder="邮箱地址" class="form-control input-md">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_u_email"></span>
+                    <div ng-if="Signup.touched_u_email && !Signup.valid_u_email" class="help-block">
+                        <span class="label label-warning">{{Signup.help_username_email}}</span>
+                    </div>
+                    <!--span ng-if="Signup.touched_u_email && !Signup.valid_u_email" class="label label-warning">{{Signup.help_username_email}}</span-->
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_password">设置密码：</label>
+                <div class="col-md-4">
+                    <input id="signup_password" type="password" ng-model="Signup.password" ng-click="Signup.touchP()"
+                           ng-blur="Signup.checkPassword()" placeholder="设置密码" class="form-control input-md" maxlength="16">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_p"></span>
+                    <div ng-if="Signup.touched_p && !Signup.valid_p" class="help-block">
+                        <span class="label label-warning">{{Signup.help_password}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_password_confirm">确认密码：</label>
+                <div class="col-md-4">
+                    <input id="signup_password_confirm" type="password" ng-model="Signup.password_check" ng-click="Signup.touchPCheck()"
+                           ng-blur="Signup.checkPasswordCheck()" placeholder="确认密码" class="form-control input-md" maxlength="16">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_p_check"></span>
+                    <div ng-if="Signup.touched_p_check && !Signup.valid_p_check" class="help-block">
+                        <span class="label label-warning">{{Signup.help_password_check}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_verify">验证码：</label>
+                <div class="col-md-4">
+                    <input id="signup_verify" type="text" ng-model="Signup.captcha" ng-blur="Signup.checkCaptcha()" placeholder="验证码" class="form-control input-md">
+                    <div ng-if="Signup.touched_captcha && !Signup.valid_captcha" class="help-block" required="true">
+                        <span class="label label-info">{{Signup.help_captcha}}</span>
+                    </div>
+                </div>
+            </div-->
+
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button id="signup_confirm" ng-click="Signup.signup()" class="btn btn-primary">注册</button>
+                    <span class="label label-danger">{{Signup.help_post}}</span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="container">
+    <form class="form-horizontal" ng-if="Signup.current_block_phone">
+        <fieldset>
+            <!--legend>邮箱注册</legend-->
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_username">手机号码：</label>
+                <div class="col-md-4">
+                    <input id="signup_username" type="text" ng-model="Signup.username_phone" ng-click="Signup.touchUPhone()"
+                           ng-blur="Signup.checkUPhone()" placeholder="手机号码" class="form-control input-md">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_u_phone"></span>
+                    <span ng-if="Signup.touched_u_phone && !Signup.valid_u_phone" class="label label-warning">{{Signup.help_username_phone}}</span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_password">设置密码：</label>
+                <div class="col-md-4">
+                    <input id="signup_password" type="password" ng-model="Signup.password" ng-click="Signup.touchP()"
+                           ng-blur="Signup.checkPassword()" placeholder="设置密码" class="form-control input-md">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_p"></span>
+                    <span ng-if="Signup.touched_p && !Signup.valid_p" class="label label-warning">{{Signup.help_password}}</span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_password_confirm">确认密码：</label>
+                <div class="col-md-4">
+                    <input id="signup_password_confirm" type="password" ng-model="Signup.password_check" ng-click="Signup.touchPCheck()"
+                           ng-blur="Signup.checkPasswordCheck()" placeholder="确认密码" class="form-control input-md">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Signup.valid_p_check"></span>
+                    <span ng-if="Signup.touched_p_check && !Signup.valid_p_check" class="label label-warning">{{Signup.help_password_check}}</span>
+                </div>
+            </div>
+
+            <!--div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="signup_verify">验证码</label>
+                <div class="col-md-4">
+                    <input id="signup_verify" type="text" ng-model="Signup.captcha" ng-blur="Signup.checkCaptcha()" placeholder="验证码" class="form-control input-md">
+                    <span class="label label-info">{{Signup.help_captcha}}</span>
+                </div>
+            </div-->
+
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button ng-click="Signup.signup()" class="btn btn-primary">注册</button>
+                    <span class="label label-danger">{{Signup.help_post}}</span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

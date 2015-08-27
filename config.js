@@ -4,7 +4,9 @@
 module.exports =
 {
     db: 'mongodb://root:root123456@ds040948.mongolab.com:40948/ts_test',
-    secret_key: 'tiaosaoappsecretkey',
+    secret_key: 'TiaosaoAppSecretKey',
+    user_active_key:'TiaosaoAppUserActiveKey',
+    captcha_key:'TiaosaoAppCaptchaKey',
     port: process.env.PORT || 3000,
 
     // 返回数据条目数

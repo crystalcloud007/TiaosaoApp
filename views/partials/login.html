@@ -1,0 +1,55 @@
+<div class="container">
+    <div ng-if="Login.err" class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Login.err_msg}}</strong>
+    </div>
+</div>
+<div class="container">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <h2 class="col-md-4"><strong>用户登录</strong></h2>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="col-md-4 control-label" for="login_username">用户名：</label>
+            <div class="col-md-4">
+                <input id="login_username" type="text" ng-model="Login.username" placeholder="填写用户名，请使用注册的邮箱地址或手机号码。"
+                       class="form-control input-md" ng-click="Login.touchU()" ng-blur="Login.checkU()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Login.valid_u"></span>
+                <div ng-if="Login.touched_u && !Login.valid_u" class="help-block">
+                    <span class="label label-warning">{{Login.msg_u}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label class="col-md-4 control-label" for="Login_password">密码：</label>
+            <div class="col-md-4">
+                <input id="Login_password" type="password" ng-model="Login.password" placeholder="填写密码"
+                       class="form-control input-md" maxlength="16" ng-click="Login.touchP()" ng-blur="Login.checkP()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Login.valid_p"></span>
+                <div ng-if="Login.touched_p && !Login.valid_p" class="help-block">
+                    <span class="label label-warning">{{Login.msg_p}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!--div class="form-group has-feedback">
+            <label class="col-md-4 control-label" for="Login_verify">验证码</label>
+            <div class="col-md-4">
+                <input id="Login_verify" type="text" ng-model="Login.captcha" ng-blur="Login.checkCaptcha()" placeholder="验证码" class="form-control input-md">
+                <span class="label label-info">{{Login.help_captcha}}</span>
+            </div>
+        </div-->
+
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button ng-click="Login.login()" class="btn btn-primary">登录</button>
+                <span class="label label-danger">{{Login.msg_post}}</span>
+            </div>
+        </div>
+    </form>
+</div>

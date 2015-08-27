@@ -7,6 +7,7 @@ module.exports =
     // 业务类型与分类
     entry_category:
     {
+
         'second_hand':
         {
             eng:'second_hand',

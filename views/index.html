@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <base href="/">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/tiaosao.css" rel="stylesheet">
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-route.min.js"></script>
+    <script src="js/services/AuthService.js"></script>
+    <script src="js/services/ConfigService.js"></script>
+    <script src="js/controllers/HomeCtrl.js"></script>
     <script src="app.js"></script>
-    <style>
-        .footer-copy
-        {
-            background:#f2f2f2;
-            padding:10px;
-            text-align: center;
-        }
-    </style>
+    <script src="appRoute.js"></script>
     <title>跳骚网</title>
 </head>
 <body>
-    <header>
+    <header ng-controller="HomeController as Home">
         <nav class="nav navbar-default navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
@@ -26,52 +24,43 @@
                 </div>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="/">注册</a></li>
-                        <li><a href="/">登录</a></li>
-                        <li><span class="spliter"></span></li>
-                        <li><a href="/">免费发布信息</a> </li>
+                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/signup">注册</a></li>
+                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/login">登录</a></li>
+                        <li role="presentation"><a href="/">免费发布信息</a> </li>
+                        <!--li ng-if="Home.loggedIn" role="presentation">
+                            <a href="javascritp:void(0)">你好，{{Home.user.username}}</a>
+                        </li-->
+                        <li ng-if="Home.loggedIn" role="presentation">
+                            <a href="#">查看个人信息</a>
+                        </li>
+                        <li ng-if="Home.loggedIn" role="presentation">
+                            <a ng-click="Home.logOut()" href="javascript:void(0)">退出登录</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
+    <hr/>
+    <main>
+        <!--div class="container">
+            <p class="col-md-12">如果显示25，前端代码夹在成功：{{5*5}}</p>
+        </div-->
+        <div ng-view></div>
+    </main>
+    <hr/>
     <div class="container">
-        <div class="col-md-12">
-            <p>这里以后会是主菜单的位置</p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="jumbotron">
-            <p>欢迎来到跳骚网，这里以后会出现轮替广告</p>
-        </div>
-        <div class="col-md-4">
-            <p>热门信息-房产</p>
-            <button class="btn btn-success">了解更多 &raquo;</button>
-        </div>
-        <div class="col-md-4">
-            <p>热门信息-二手市场</p>
-            <button class="btn btn-success">了解更多 &raquo;</button>
-        </div>
-        <div class="col-md-4">
-            <p>热门信息-汽车相关</p>
-            <button class="btn btn-success">了解更多 &raquo;</button>
-        </div>
-    </div>
-    <div class="container">
-        <hr/>
-        <div class="col-md-12">
-            <ul class="list-inline">
-                <li><a href="/">链接项目</a></li>
-                <li><a href="/">链接项目</a></li>
-                <li><a href="/">链接项目</a></li>
-                <li><a href="/">链接项目</a></li>
-                <li><a href="/">链接项目</a></li>
-            </ul>
-        </div>
+        <ul class="col-md-12 list-inline">
+            <li><a href="/">链接项目</a></li>
+            <li><a href="/">链接项目</a></li>
+            <li><a href="/">链接项目</a></li>
+            <li><a href="/">链接项目</a></li>
+            <li><a href="/">链接项目</a></li>
+        </ul>
     </div>
     <footer>
         <div class="container">
+            <hr/>
             <div class="footer-copy">
                 <p>京ICP备xxxxxxxx号 京ICP证xxxxxx号 京公网安备:110xxxxxxxx</p>
                 <p>Copyright©2015 tiaosao.com All Rights Reserved</p>

@@ -1,0 +1,65 @@
+<!--div class="container">
+    <div class="jumbotron">
+        <p>欢迎来到跳骚网，这里以后会出现轮替广告</p>
+    </div>
+</div-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 center-block">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="搜索想要的信息">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <hr/>
+</div>
+<div class="container">
+    <div class="col-md-12 panel panel-default" ng-repeat="item_main in MainMenu.category">
+        <h4><strong>{{item_main.chn}}</strong></h4>
+        <ul class="list-group list-inline">
+            <li ng-repeat="item_sub in item_main.subs" class="list-group-item">
+                <a href="#">{{item_sub.chn}}</a>
+                <b> | </b>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--div class="container" ng-mouseleave="MainMenu.mouseLeaveMenuMain()">
+    <div class="row">
+        <div class="col-md-2">
+            <h5 ng-repeat="item_main in MainMenu.category">
+                <a href="javascript:void(0)" ng-mouseOver="MainMenu.mouseOverCateMain(item_main.eng)">{{item_main.chn}}</a>
+            </h5>
+        </div>
+        <div class="col-md-10" ng-hide="MainMenu.mouseOverMenuMain">
+            <img src="img/ad-000.jpg" class="img-responsive"/>
+        </div>
+        <div class="col-md-10" ng-show="MainMenu.mouseOverMenuMain">
+            <ul class="list-inline list-group">
+                <li ng-repeat="item_sub in MainMenu.cateSubs" class="list-group-item">
+                    <a href="#">{{item_sub.chn}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div-->
+<div class="container">
+    <hr/>
+    <div class="col-md-4">
+        <h3>热门信息-房产</h3>
+        <button class="btn btn-success">了解更多 &raquo;</button>
+    </div>
+    <div class="col-md-4">
+        <h3>热门信息-二手市场</h3>
+        <button class="btn btn-success">了解更多 &raquo;</button>
+    </div>
+    <div class="col-md-4">
+        <h3>热门信息-汽车相关</h3>
+        <button class="btn btn-success">了解更多 &raquo;</button>
+    </div>
+</div>
