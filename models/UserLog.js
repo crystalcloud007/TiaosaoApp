@@ -12,3 +12,5 @@ var UserLog = new Schema(
         time:{type:Date, default:Date.now()}
     }
 );
+
+module.exports = mongoose.model('UserLog', UserLog);
