@@ -1,0 +1,24 @@
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="serv_tutor_type">业务类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="serv_tutor_type">
+            <option value="家教">家教</option>
+            <option value="艺术/体育">艺术/体育</option>
+            <option value="职业技能培训">职业技能培训</option>
+            <option value="学历教育">学历教育</option>
+            <option value="其他服务">其他服务</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="serv_tutor_short_desc">业务范围：</label>
+    <div class="col-md-6">
+        <input id="serv_tutor_short_desc" type="text" name="serv_tutor_short_desc" ng-model="entry.desc.short_desc"
+               ng-pattern="/^[\s\S]{2,20}$/"
+               ng-required="true" class="form-control input-md" placeholder="简要介绍一下业务范围，20个字符以内" maxlength="20">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.serv_tutor_short_desc.$valid"></span>
+        <p ng-if="entryForm.serv_tutor_short_desc.$invalid&&entryForm.serv_tutor_short_desc.$dirty" class="help-block label label-warning">
+            输入简要业务介绍，2-20个字符。
+        </p>
+    </div>
+</div>

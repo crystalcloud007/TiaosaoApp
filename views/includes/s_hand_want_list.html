@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div ng-repeat="entry in entries">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-hand-right"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4><a href="{{current_city}}/detail/{{entry._id}}" target="_blank">{{entry.title}}</a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-info-sign"></span></p>
+                        </div>
+                        <div class="col-md-11">
+                            <p>{{entry.desc.type}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center">{{entry.desc.price_from}}—{{entry.desc.price_to}}元</h4>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>

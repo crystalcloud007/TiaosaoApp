@@ -1,0 +1,45 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_want_d_price_e">租金：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.price" ng-required="true" id="re_want_d_price_e">
+            <option value="100元以下/天">100元以下/天</option>
+            <option value="100-200元/天">100-200元/天</option>
+            <option value="200-300元/天">200-300元/天</option>
+            <option value="300-400元/天">300-400元/天</option>
+            <option value="400-500元/天">400-500元/天</option>
+            <option value="500-600元/天">500-600元/天</option>
+            <option value="600-700元/天">600-700元/天</option>
+            <option value="700元以上/天">700元以上/天</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_want_d_type_e">房屋类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="re_want_d_type_e">
+            <option value="家庭旅馆">家庭旅馆</option>
+            <option value="酒店式公寓">酒店式公寓</option>
+            <option value="经济型酒店">经济型酒店</option>
+            <option value="宾馆招待所">宾馆招待所</option>
+            <option value="特色客栈">特色客栈</option>
+            <option value="星级酒店">星级酒店</option>
+            <option value="青年旅社">青年旅社</option>
+            <option value="其他类型">其他类型</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_want_d_period_shortest_e">最短租期：</label>
+    <div class="col-md-2">
+        <input id="re_want_d_period_shortest_e" type="text" name="re_want_d_period_shortest_e" ng-model="entry_upload.desc.period_shortest"
+               ng-pattern="/^[1-9][0-9]{0,1}$/"
+               ng-required="true" class="form-control input-md" placeholder="如10" maxlength="2">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_d_period_shortest_e.$valid"></span>
+        <p ng-if="entryEditForm.re_want_d_period_shortest_e.$invalid&&entryEditForm.re_want_d_period_shortest_e.$dirty" class="help-block label label-warning">
+            请填写最短租期，1-2位数字。
+        </p>
+    </div>
+    <div class="col-md-8">
+        <h4 class="text-left">天</h4>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_want_o_price_from_e">租金范围：</label>
+    <div class="col-md-3">
+        <input id="re_want_o_price_from_e" type="text" name="re_want_o_price_from_e" ng-model="entry_upload.desc.price_from"
+               ng-pattern="/^[1-9][0-9]{1,5}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_o_price_from_e.$valid"></span>
+        <div class="help-block"
+             ng-if="(entryEditForm.re_want_o_price_from_e.$invalid&&entryEditForm.re_want_o_price_from_e.$dirty)||
+         (entryEditForm.re_want_o_price_to_e.$invalid&&entryEditForm.re_want_o_price_to_e.$dirty)">
+            <p class="label label-warning">
+                请填写有效金额，2-6位整数。后面的数字要大于前面的数字。
+            </p>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <h4>——</h4>
+    </div>
+    <div class="col-md-3">
+        <input id="re_want_o_price_to_e" type="text" name="re_want_o_price_to_e" ng-model="entry_upload.desc.price_to"
+               ng-pattern="/^[1-9][0-9]{1,5}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_o_price_to_e.$valid"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_want_o_type_rent_e">租金类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_rent" ng-required="true" id="re_want_o_type_rent_e">
+            <option value="元/天">元/天</option>
+            <option value="元/月">元/月</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_want_o_type_e">楼盘类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="re_want_o_type_e">
+            <option value="写字楼">写字楼</option>
+            <option value="商务中心">商务中心</option>
+            <option value="商住公寓">商住公寓</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_want_o_size_from_e">面积范围：</label>
+    <div class="col-md-3">
+        <input id="re_want_o_size_from_e" type="text" name="re_want_o_size_from_e" ng-model="entry_upload.desc.size_from"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_o_size_from_e.$valid"></span>
+        <div class="help-block"
+             ng-if="(entryEditForm.re_want_o_size_from_e.$invalid&&entryEditForm.re_want_o_size_from_e.$dirty)||
+         (entryEditForm.re_want_o_size_to_e.$invalid&&entryEditForm.re_want_o_size_to_e.$dirty)">
+            <p class="label label-warning">
+                请填写有效面积，2-4位数字。后面的数字要大于前面的数字。
+            </p>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <h4>——</h4>
+    </div>
+    <div class="col-md-3">
+        <input id="re_want_o_size_to_e" type="text" name="re_want_o_size_to_e" ng-model="entry_upload.desc.size_to"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_o_size_to_e.$valid"></span>
+    </div>
+    <div class="col-md-2">
+        <h4 class="text-left">平米</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_want_o_reg_e">是否可注册：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.can_reg" ng-required="true" id="re_want_o_reg_e">
+            <option value="可注册">可注册</option>
+            <option value="不可注册">不可注册</option>
+        </select>
+    </div>
+</div>

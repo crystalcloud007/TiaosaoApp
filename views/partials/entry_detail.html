@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center">此处还可以放一些广告或者其他功能</p>
+        </div>
+    </div>
+    <div ng-include="'includes/search.html'"></div>
+    <div class="row">
+        <div class="col-md-2">广告</div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-hand-right"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4 class="text-left"><strong>{{entry.title}}</strong></h4>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-user"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4 class="text-left">{{entry.contact_n}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-phone"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4 class="text-left">{{entry.contact_p}}</h4>
+                        </div>
+                    </div>
+                    <!--h4><span class="glyphicon glyphicon-user"></span>：{{entry.contact_n}}</h4-->
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-map-marker"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4 class="text-left">{{entry.region_district}}，{{entry.region_addr}}</h4>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div ng-include="category"></div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-th-list"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4 class="text-left"><strong>详细说明：</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <div tsshowhtml content="entry.content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">广告</div>
+    </div>
+</div>

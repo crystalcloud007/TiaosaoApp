@@ -1,0 +1,12 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="v_dmm_type_e">业务类型：</label>
+    <div class="col-md-10">
+        <input id="v_dmm_type_e" type="text" name="v_dmm_type_e" ng-model="entry_upload.desc.type"
+               ng-pattern="/^[\s\S]{2,30}$/"
+               ng-required="true" class="form-control input-md" placeholder="如洗车 底盘维修 外观改装 性能提升等" maxlength="30">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.v_dmm_type_e.$valid"></span>
+        <p ng-if="entryEditForm.v_dmm_type_e.$invalid&&entryEditForm.v_dmm_type_e.$dirty" class="help-block label label-warning">
+            请填写经营类别，2-30个字符。
+        </p>
+    </div>
+</div>

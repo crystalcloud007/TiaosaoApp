@@ -1,6 +1,6 @@
 <div class="container">
     <div ng-if="Login.err" class="alert alert-danger alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Login.closeErrBanner()">
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>{{Login.err_msg}}</strong>
@@ -16,7 +16,7 @@
             <label class="col-md-4 control-label" for="login_username">用户名：</label>
             <div class="col-md-4">
                 <input id="login_username" type="text" ng-model="Login.username" placeholder="填写用户名，请使用注册的邮箱地址或手机号码。"
-                       class="form-control input-md" ng-click="Login.touchU()" ng-blur="Login.checkU()">
+                       class="form-control input-md" ng-click="Login.touchU()" ng-blur="Login.checkU()" maxlength="40">
                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Login.valid_u"></span>
                 <div ng-if="Login.touched_u && !Login.valid_u" class="help-block">
                     <span class="label label-warning">{{Login.msg_u}}</span>

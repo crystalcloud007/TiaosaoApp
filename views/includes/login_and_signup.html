@@ -1,0 +1,174 @@
+<div class="row" ng-controller="LoginAndSignUpController as LAS">
+    <div class="nav nav-tabs">
+        <li role="presentation" class="active" ng-if="LAS.nav_login">
+            <a href="javascript:void(0)">登录</a>
+        </li>
+        <li role="presentation" ng-if="!LAS.nav_login">
+            <a href="javascript:void(0)" ng-click="LAS.navLogin()">登录</a>
+        </li>
+        <li role="presentation" class="active" ng-if="LAS.nav_signup_email">
+            <a href="javascript:void(0)">用邮箱地址注册</a>
+        </li>
+        <li role="presentation" ng-if="!LAS.nav_signup_email">
+            <a href="javascript:void(0)" ng-click="LAS.navSignUpEmail()">用邮箱地址注册</a>
+        </li>
+        <li role="presentation" class="active" ng-if="LAS.nav_signup_phone">
+            <a href="javascript:void(0)">用手机号码注册</a>
+        </li>
+        <li role="presentation" ng-if="!LAS.nav_signup_phone">
+            <a href="javascript:void(0)" ng-click="LAS.navSignUpPhone()">用手机号码注册</a>
+        </li>
+    </div>
+    <div ng-if="LAS.b_err" class="alert alert-danger alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="LAS.closeErrBanner()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{LAS.msg_err}}</strong>
+    </div>
+    <form class="form form-horizontal" role="form" name="LAS_loginForm" ng-if="LAS.nav_login">
+        <fieldset>
+            <div class="form-group">
+                <div class="col-sm-4"></div>
+                <h3 class="col-md-4"><strong>用户登录</strong></h3>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label col-md-4" for="LAS_login_username">用户名：</label>
+                <div class="col-md-4">
+                    <input id="LAS_login_username" name="LAS_login_username" placeholder="填写用户名，请使用注册的邮箱地址或手机号码。" class="form-control input-md"
+                           ng-model="LAS.username_login" ng-required="true" maxlength="40" type="text"
+                           ng-pattern="/^(([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2}))|(((\+?86)|(\(\+86\)))?(13[0123456789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7}))$/">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_loginForm.LAS_login_username.$valid"></span>
+                    <p ng-if="LAS_loginForm.LAS_login_username.$invalid&&LAS_loginForm.LAS_login_username.$dirty" class="help-block label label-warning">
+                        请以手机号或邮箱地址的正确格式输入。
+                    </p>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label col-md-4" for="LAS_login_password">密码：</label>
+                <div class="col-md-4">
+                    <input id="LAS_login_password" name="LAS_login_password" placeholder="请填写密码。" class="form-control input-md" ng-model="LAS.password"
+                           ng-required="true" ng-pattern="/^[a-z0-9A-Z]{6,16}$/" maxlength="16" minlength="6" type="password">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_loginForm.LAS_login_password.$valid"></span>
+                    <p ng-if="LAS_loginForm.LAS_login_password.$invalid&&LAS_loginForm.LAS_login_password.$dirty" class="help-block label label-warning">
+                        6-16位数字和英文字母，字母区分大小写。
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button ng-if="LAS_loginForm.$invalid" class="btn btn-primary" disabled>登录</button>
+                    <button ng-if="LAS_loginForm.$valid" class="btn btn-primary" ng-click="LAS.login()">登录</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <form class="form form-horizontal" role="form" name="LAS_seForm" ng-if="LAS.nav_signup_email">
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <h3 class="col-md-4"><strong>使用邮箱地址注册</strong></h3>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_se_username">用户名：</label>
+            <div class="col-md-4">
+                <input id="LAS_se_username" name="LAS_se_username" placeholder="填写正确的邮箱地址。" class="form-control input-md"
+                       ng-model="LAS.username_email" ng-required="true" maxlength="40" type="text" ng-blur="LAS.checkUsername()" ng-click="LAS.uncheckUsername()"
+                       ng-pattern="/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_seForm.LAS_se_username.$valid&&!LAS.b_username_exist"></span>
+                <p ng-if="LAS_seForm.LAS_se_username.$invalid&&LAS_seForm.LAS_se_username.$dirty" class="help-block label label-warning">
+                    请以手机号或邮箱地址的正确格式输入。
+                </p>
+                <p ng-if="LAS_seForm.LAS_se_username.$valid&&LAS.b_username_exist" class="help-block label label-warning">
+                    {{LAS.msg_username_exist}}
+                </p>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_se_password">设置密码：</label>
+            <div class="col-md-4">
+                <input id="LAS_se_password" name="LAS_se_password" placeholder="请填写密码。" class="form-control input-md" ng-model="LAS.password"
+                       ng-required="true" ng-pattern="/^[a-z0-9A-Z]{6,16}$/" maxlength="16" minlength="6" type="password">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_seForm.LAS_se_password.$valid"></span>
+                <p ng-if="LAS_seForm.LAS_se_password.$invalid&&LAS_seForm.LAS_se_password.$dirty" class="help-block label label-warning">
+                    6-16位数字和英文字母，字母区分大小写。
+                </p>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_se_password_c">确认密码：</label>
+            <div class="col-md-4">
+                <input id="LAS_se_password_c" name="LAS_se_password_c" placeholder="请填写密码。" class="form-control input-md" ng-model="LAS.password_check"
+                       ng-required="true" ng-pattern="/^[a-z0-9A-Z]{6,16}$/" maxlength="16" minlength="6" type="password" ng-blur="LAS.checkPasswordCheck()"
+                       ng-click="LAS.uncheckPasswordCheck()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_seForm.LAS_se_password_c.$valid&&LAS.valid_password_check"></span>
+                <p ng-if="LAS_seForm.LAS_se_password_c.$valid&&!LAS.valid_password_check" class="help-block label label-warning">
+                    两次输入的密码需一致。
+                </p>
+                <p ng-if="LAS_seForm.LAS_se_password_c.$invalid&&LAS_seForm.LAS_se_password_c.$dirty" class="help-block label label-warning">
+                    6-16位数字和英文字母，字母区分大小写。
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button ng-if="LAS_seForm.$invalid||LAS.b_username_exist||!LAS.valid_password_check" class="btn btn-primary" disabled>注册</button>
+                <button ng-if="LAS_seForm.$valid&&!LAS.b_username_exist&&LAS.valid_password_check" class="btn btn-primary" ng-click="LAS.signup()">注册</button>
+            </div>
+        </div>
+    </form>
+    <form class="form form-horizontal" role="form" name="LAS_spForm" ng-if="LAS.nav_signup_phone">
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <h3 class="col-md-4"><strong>使用手机号码注册</strong></h3>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_sp_username">用户名：</label>
+            <div class="col-md-4">
+                <input id="LAS_sp_username" name="LAS_sp_username" placeholder="填写正确的邮箱地址。" class="form-control input-md"
+                       ng-model="LAS.username_phone" ng-required="true" maxlength="15" type="text" ng-blur="LAS.checkUsername()" ng-click="LAS.uncheckUsername()"
+                       ng-pattern="/^((\+?86)|(\(\+86\)))?(13[0123456789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_spForm.LAS_sp_username.$valid&&!LAS.b_username_exist"></span>
+                <p ng-if="LAS_spForm.LAS_sp_username.$invalid&&LAS_spForm.LAS_sp_username.$dirty" class="help-block label label-warning">
+                    请以手机号或邮箱地址的正确格式输入。
+                </p>
+                <p ng-if="LAS_spForm.LAS_sp_username.$valid&&LAS.b_username_exist" class="help-block label label-warning">
+                    {{LAS.msg_username_exist}}
+                </p>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_sp_password">设置密码：</label>
+            <div class="col-md-4">
+                <input id="LAS_sp_password" name="LAS_sp_password" placeholder="请填写密码。" class="form-control input-md" ng-model="LAS.password"
+                       ng-required="true" ng-pattern="/^[a-z0-9A-Z]{6,16}$/" maxlength="16" minlength="6" type="password">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_spForm.LAS_sp_password.$valid"></span>
+                <p ng-if="LAS_spForm.LAS_sp_password.$invalid&&LAS_spForm.LAS_sp_password.$dirty" class="help-block label label-warning">
+                    6-16位数字和英文字母，字母区分大小写。
+                </p>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-4" for="LAS_sp_password_c">确认密码：</label>
+            <div class="col-md-4">
+                <input id="LAS_sp_password_c" name="LAS_sp_password_c" placeholder="请填写密码。" class="form-control input-md" ng-model="LAS.password_check"
+                       ng-required="true" ng-pattern="/^[a-z0-9A-Z]{6,16}$/" maxlength="16" minlength="6" type="password" ng-blur="LAS.checkPasswordCheck()"
+                        ng-click="LAS.uncheckPasswordCheck()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="LAS_spForm.LAS_sp_password_c.$valid&&LAS.valid_password_check"></span>
+                <p ng-if="LAS_spForm.LAS_sp_password_c.$valid&&!LAS.valid_password_check" class="help-block label label-warning">
+                    两次输入的密码需一致。
+                </p>
+                <p ng-if="LAS_spForm.LAS_sp_password_c.$invalid&&LAS_spForm.LAS_sp_password_c.$dirty" class="help-block label label-warning">
+                    6-16位数字和英文字母，字母区分大小写。
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button ng-if="LAS_spForm.$invalid||LAS.b_username_exist||!LAS.valid_password_check" class="btn btn-primary" disabled>注册</button>
+                <button ng-if="LAS_spForm.$valid&&!LAS.b_username_exist&&LAS.valid_password_check" class="btn btn-primary" ng-click="LAS.signup()">注册</button>
+            </div>
+        </div>
+    </form>
+</div>

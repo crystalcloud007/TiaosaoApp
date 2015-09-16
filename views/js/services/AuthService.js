@@ -2,7 +2,7 @@
  * Created by Haoran on 2015/8/20.
  */
 angular.module('AuthService',[])
-    .factory('AuthToken', function($window)
+    .factory('AuthToken',['$window', function($window)
     {
         var ATFac = {};
 
@@ -24,10 +24,20 @@ angular.module('AuthService',[])
         };
 
         return ATFac;
-    })
-    .factory('Auth', function($http, $q, AuthToken)
+    }])
+    .factory('Auth', ["$http",'$q','AuthToken', function($http, $q, AuthToken)
     {
         var AF = {};
+
+        AF.signup = function(username, password, signup_type)
+        {
+            $http.post('/api/user/signup', {username:username, password:password, s_type:signup_type})
+                .success(function(data)
+                {
+                    AuthToken.setToken(data.token);
+                    return data;
+                });
+        };
 
         AF.login = function(username, password)
         {
@@ -35,6 +45,11 @@ angular.module('AuthService',[])
                 .success(function(data)
                 {
                     AuthToken.setToken(data.token);
+                    return data;
+                })
+                .error(function(data)
+                {
+                    AuthToken.setToken();
                     return data;
                 });
         };
@@ -79,8 +94,9 @@ angular.module('AuthService',[])
         };
 
         return AF;
-    })
-    .factory('AuthInterceptor', function($q, $location, AuthToken)
+    }])
+    .factory('AuthInterceptor', ['$q','$location', '$rootScope', 'AuthToken',
+        function($q, $location,$rootScope, AuthToken)
     {
         var interceptor = {};
 
@@ -98,10 +114,12 @@ angular.module('AuthService',[])
         {
             if(response.status == 403)
             {
-                $location.path("/login");
+                AuthToken.setToken();
+
+                $location.path("/" + $rootScope.current_geo_city + "/login");
             }
             return $q.reject(response);
         };
 
         return interceptor;
-    });
+    }]);

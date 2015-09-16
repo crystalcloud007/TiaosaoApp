@@ -1,0 +1,41 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="sh_want_price_from">价格范围：</label>
+    <div class="col-md-3">
+        <input id="sh_want_price_from" type="text" name="sh_want_price_from" ng-model="entry.desc.price_from"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如500" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.sh_want_price_from.$valid"></span>
+        <div class="help-block"
+             ng-if="(entryForm.sh_want_price_from.$invalid&&entryForm.sh_want_price_from.$dirty)||
+         (entryForm.sh_want_price_to.$invalid&&entryForm.sh_want_price_to.$dirty)">
+            <p class="label label-warning">
+                请填写有效金额，2-5位整数。后面的数字要大于前面的数字。
+            </p>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <h4>—</h4>
+    </div>
+    <div class="col-md-3">
+        <input id="sh_want_price_to" type="text" name="sh_want_price_to" ng-model="entry.desc.price_to"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如500" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.sh_want_price_to.$valid"></span>
+    </div>
+    <div class="col-md-3">
+        <h4 class="text-left">元</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="sh_want_type">类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="sh_want_type">
+            <option value="二手手机">二手手机</option>
+            <option value="全新已拆封">数码产品</option>
+            <option value="家电、家具、家居及母婴用品">家电、家具、家居及母婴用品</option>
+            <option value="服装、穿戴、箱包、配饰">服装、穿戴、箱包、配饰</option>
+            <option value="书籍、文教、运动、乐器">书籍、文教、运动、乐器</option>
+            <option value="其他类型物品">其他类型物品</option>
+        </select>
+    </div>
+</div>

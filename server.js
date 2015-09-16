@@ -6,11 +6,14 @@ var morgan = require('morgan');
 var bodyparser = require('body-parser');
 var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
-var config = require('./config');
+var config = require('./configs/config');
 
 var app = express();
 
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+
+
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(morgan('dev'));
@@ -24,15 +27,28 @@ mongoose.connect(config.db, function(err)
 // Render public files
 app.use(express.static(__dirname + '/views'));
 
+// Set response header
+/*app.all('*',function(req,res,next)
+{
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", '3.2.1');
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});*/
+
 // APP apis
 var user_api = require('./routes/api_user')(app ,express);
 var general_api = require('./routes/api_general')(app, express);
-//var entry_api = require('./routes/api_entry')(app, express);
+var help_api = require('./routes/api_help')(app,express);
+var entry_api = require('./routes/api_entry')(app,express);
 //var admin_api = require('./routes/api_admin')(app, express);
 
 app.use('/api/user', user_api);
 app.use('/api/gen', general_api);
-//app.use('/api/entry', entry_api);
+app.use('/api/help', help_api);
+app.use('/api/entry', entry_api);
 //app.use('/api/admin', admin_api);
 
 

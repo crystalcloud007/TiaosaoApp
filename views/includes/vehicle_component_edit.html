@@ -1,0 +1,43 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="v_buy_component_price_e">价格：</label>
+    <div class="col-md-4">
+        <input id="v_buy_component_price_e" type="text" name="v_buy_component_price_e" ng-model="entry_upload.desc.price"
+               ng-pattern="/^[1-9][0-9]{2,5}$/"
+               ng-required="true" class="form-control input-md" placeholder="如1000" maxlength="6">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.v_buy_component_price_e.$valid"></span>
+        <p ng-if="entryEditForm.v_buy_component_price_e.$invalid&&entryEditForm.v_buy_component_price_e.$dirty" class="help-block label label-warning">
+            请填写有效价格，3-6位整数。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">元</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="v_buy_component_type_e">配件类别：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="v_buy_component_type_e">
+            <option value="发动机配件">发动机配件</option>
+            <option value="汽车底盘">汽车底盘</option>
+            <option value="车身附件">车身附件</option>
+            <option value="电子电器">电子电器</option>
+            <option value="视听设备">视听设备</option>
+            <option value="养护用品">养护用品</option>
+            <option value="汽车用品">汽车用品</option>
+            <option value="拆车件">拆车件</option>
+            <option value="改装配件">改装配件</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="v_buy_component_aged_e">新旧：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.aged" ng-required="true" id="v_buy_component_aged_e">
+            <option value="全新">全新</option>
+            <option value="95成新">95成新</option>
+            <option value="9成新">9成新</option>
+            <option value="8成新">8成新</option>
+            <option value="7成新及以下">7成新及以下</option>
+        </select>
+    </div>
+</div>

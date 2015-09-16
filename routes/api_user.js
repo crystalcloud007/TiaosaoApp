@@ -3,14 +3,15 @@
  */
 
 var User = require('../models/User');
+var mailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var UserLog = require('../models/UserLog');
-var config = require('../config');
+var config = require('../configs/config');
 var VerifyInfo = require('../models/VerifyInfo');
 var secret_key = config.secret_key;
 var active_key = config.user_active_key;
 
-// ÉèÖÃtoken£¬Ç¿ÖÆ¹æ¶¨Ã¿ÖÜ¹ıÆÚ¡£
+// è®¾ç½®tokenï¼Œå¼ºåˆ¶è§„å®šæ¯å‘¨è¿‡æœŸã€‚
 function CreateToken(user)
 {
     var token = jwt.sign(
@@ -20,7 +21,7 @@ function CreateToken(user)
         },
         secret_key,
         {
-            expiresInMinute : 1440
+            expiresInMinutes : 10080
         }
     );
 
@@ -36,13 +37,13 @@ function CreateActiveToken(user)
         ,
         active_key,
         {
-            expiresInMinute:360
+            expiresInMinutes:360
         }
     );
     return token;
 }
 
-// ·¢ËÍÑéÖ¤emailµÄtoken£¬Ò»Ğ¡Ê±ºóÊ§Ğ§¡£
+// å‘é€éªŒè¯emailçš„tokenï¼Œä¸€å°æ—¶åå¤±æ•ˆã€‚
 function CreateVerifyEmailToken(id, email)
 {
     var token = jwt.sign(
@@ -52,34 +53,47 @@ function CreateVerifyEmailToken(id, email)
         },
         active_key,
         {
-            expiresInMinute: 60
+            expiresInMinutes: 60
         }
     );
 
     return token;
 }
 
+
 module.exports = function(app, express)
 {
     var api = express.Router();
 
-    // Í¨¹ıÕıÊ½½Ó¿Ú×¢²áµÄÓÃ»§£¬µÈ¼¶³õÊ¼»¯ÎªÆÕÍ¨¼¶±ğ¡£
-    // ÏÖÈ±ÉÙÑéÖ¤ÂëÄ£¿é
+    // é€šè¿‡æ­£å¼æ¥å£æ³¨å†Œçš„ç”¨æˆ·ï¼Œç­‰çº§åˆå§‹åŒ–ä¸ºæ™®é€šçº§åˆ«ã€‚
+    // ç°ç¼ºå°‘éªŒè¯ç æ¨¡å—
     api.post('/signup', function(req,res)
     {
         var user = new User();
         var valid = false;
 
-        // ¼ÓÈëÑéÖ¤Âë»·½Ú
+        // åŠ å…¥éªŒè¯ç ç¯èŠ‚
 
-        // ÑéÖ¤ÂëÎŞÎó£¬¿ªÊ¼×¢²á»·½Ú¡£
+        // éªŒè¯æ ¼å¼ -- ä¸¥é˜²é»‘å®¢ï¼Œåªè¦æ˜¯ä»æ­£å½“æ¸ é“è¾“å…¥æ¥çš„ï¼Œä¸€èˆ¬éƒ½æ²¡é—®é¢˜ã€‚
+        if(!config.checkEmail(req.body.username) && !config.checkPhone(req.body.username))
+        {
+            res.send({status:'invalid_input'});
+            return;
+        }
+        if(!config.checkPassword(req.body.password))
+        {
+            res.send({status:'invalid_input'});
+            return;
+        }
+
+        // éªŒè¯ç åŠæ ¼å¼æ— è¯¯ï¼Œå¼€å§‹æ³¨å†Œç¯èŠ‚ã€‚
         switch(req.body.s_type)
         {
             case 'email':
             {
                 user.username = req.body.username;
                 user.password = req.body.password;
-                user.level = config.level_user.just_register;
+                user.entry_per_day = config.user_entry_per_day.just_register;
                 user.email = req.body.username;
                 user.username_link = 'email';
                 valid = true;
@@ -89,7 +103,7 @@ module.exports = function(app, express)
             {
                 user.username = req.body.username;
                 user.password = req.body.password;
-                user.level = config.level_user.just_register;
+                user.entry_per_day = config.user_entry_per_day.just_register;
                 user.phone = req.body.username;
                 user.username_link = 'phone';
                 valid = true;
@@ -106,11 +120,11 @@ module.exports = function(app, express)
         {
             if(err)
             {
-                // ×¢²áÊ§°Ü£¬success·µ»Øfalse£¬ÔÚÕıÊ½°æ±¾ÖĞ£¬ºöÂÔmessage£¬Ö±½ÓÌø×ªµ½³ö´íÒ³Ãæ¡£
+                // æ³¨å†Œå¤±è´¥ï¼Œsuccessè¿”å›falseï¼Œåœ¨æ­£å¼ç‰ˆæœ¬ä¸­ï¼Œå¿½ç•¥messageï¼Œç›´æ¥è·³è½¬åˆ°å‡ºé”™é¡µé¢ã€‚
                 res.send({status:'err', message: err});
                 return;
             }
-            // ×¢²á³É¹¦£¬Éú³Étoken£¬²¢·µ»Ø¡£
+            // æ³¨å†ŒæˆåŠŸï¼Œç”Ÿæˆtokenï¼Œå¹¶è¿”å›ã€‚
             var token = CreateToken(user);
             //var active_token = CreateActiveToken(user);
             UserLog.create({target:user._id, action:config.user_action.sign_up, ip:req.ip});
@@ -132,7 +146,7 @@ module.exports = function(app, express)
         });
     });
 
-    // ÑéÖ¤email£¬ÊÇÒÔparamsµÄĞÎÊ½¡£
+    // éªŒè¯emailï¼Œæ˜¯ä»¥paramsçš„å½¢å¼ã€‚
     api.get('/verify/email/:token', function(req,res)
     {
         jwt.verify(req.params.token, active_key, function(err, decoded)
@@ -144,7 +158,7 @@ module.exports = function(app, express)
             }
             var id = decoded.id;
             var email = decoded.email;
-            User.findById(decoded.id).select('email verify_email').exec(function(err, user)
+            User.findById(decoded.id).select('email verify_email entry_per_day').exec(function(err, user)
             {
                 if(err)
                 {
@@ -155,25 +169,49 @@ module.exports = function(app, express)
                 {
                     if(!user.verify_email)
                     {
-                        if(user.email == email)
+                        VerifyInfo.findOne({target:user._id, name:user.email, action: config.verify_action.verify}, function(err,info)
                         {
-                            user.verify_email = true;
-                            user.save(function(err)
+                            if(err)
                             {
-                                if(err)
+                                res.send({status:'err', message:err});
+                                return;
+                            }
+                            if(info)
+                            {
+                                // ç¡®å®šç°åœ¨æ—¶é—´
+                                var time_now = new Date();
+                                var info_time = info.time;
+                                var diff = parseInt(time_now.getTime() - info_time.getTime()) / (1000 * 60 * 60);
+
+                                // éªŒè¯ç 1å°æ—¶å¤±æ•ˆ
+                                if(diff <= 1)
                                 {
-                                    res.send({status:'err', message:err});
-                                    return;
+                                    user.verify_email = true;
+                                    user.entry_per_day += config.user_entry_per_day.verified_email;
+                                    user.save(function(err)
+                                    {
+                                        if(err)
+                                        {
+                                            res.send({status:'err', message:err});
+                                            return;
+                                        }
+                                        // åˆ é™¤ç›¸åº”çš„éªŒè¯æ•°æ®
+                                        info.remove();
+                                        // User Logè®°å½•
+                                        UserLog.create({target:decoded.id, action:config.user_action.verify_email, ip: req.ip});
+                                        res.send({status:'success'});
+                                    });
                                 }
-                                // Éú³Élog
-                                UserLog.create({target:decoded.id, action:config.user_action.verify_email, ip: req.ip});
-                                res.send({status:'success'});
-                            });
-                        }
-                        else
-                        {
-                            res.send({status:'email_changed'});
-                        }
+                                else
+                                {
+                                    res.send({status:'expired'});
+                                }
+                            }
+                            else
+                            {
+                                res.send({status:'info_not_found'});
+                            }
+                        });
                     }
                     else
                     {
@@ -305,10 +343,10 @@ module.exports = function(app, express)
         });
     });
 
-    // ´¦ÀíÑéÖ¤ÊÖ»úºÅ
+    // å¤„ç†éªŒè¯æ‰‹æœºå·
     api.post('/verify/phone', function(req,res)
     {
-        User.findById(req.decoded.id).select('phone verify_phone').exec(function(err, user)
+        User.findById(req.decoded.id).select('phone verify_phone entry_per_day').exec(function(err, user)
         {
             if(err)
             {
@@ -331,17 +369,19 @@ module.exports = function(app, express)
                     }
                     if(info)
                     {
-                        // È·¶¨ÏÖÔÚÊ±¼ä
+                        // ç¡®å®šç°åœ¨æ—¶é—´
                         var time_now = new Date();
                         var info_time = info.time;
                         var diff = parseInt(time_now.getTime() - info_time.getTime()) / (1000 * 60);
 
-                        // ÑéÖ¤Âë10·ÖÖÓÊ§Ğ§
+                        // éªŒè¯ç 10åˆ†é’Ÿå¤±æ•ˆ
                         if(diff <= 10)
                         {
                             if(req.body.code == info.code)
                             {
                                 user.verify_phone = true;
+                                user.entry_per_day += parseInt(config.user_entry_per_day.verified_phone);
+                                console.log(user.entry_per_day);
                                 user.save(function(err)
                                 {
                                     if(err)
@@ -349,6 +389,10 @@ module.exports = function(app, express)
                                         res.send({status:'err', message:err});
                                         return;
                                     }
+                                    // åˆ é™¤ç›¸åº”çš„éªŒè¯æ•°æ®
+                                    info.remove();
+                                    // å¤„ç†User Log
+                                    UserLog.create({target:req.decoded.id, action:config.user_action.verify_phone,ip:req.ip});
                                     res.send({status:'success'});
                                 });
                             }
@@ -375,7 +419,7 @@ module.exports = function(app, express)
         });
     });
 
-    // ÉêÇëÑéÖ¤ÊÖ»úºÅ
+    // ç”³è¯·éªŒè¯æ‰‹æœºå·
     api.get('/req_verify/phone', function(req,res)
     {
         User.findById(req.decoded.id).select('phone verify_phone').exec(function(err,user)
@@ -387,18 +431,18 @@ module.exports = function(app, express)
             }
             if(user)
             {
-                // ·¢ËÍÊÖ»ú¶ÌĞÅ£¬¸Ã¹¦ÄÜÉĞÎ´ÊµÏÖ£¬ÏÈÓÃres·µ»ØÏûÏ¢
+                // å‘é€æ‰‹æœºçŸ­ä¿¡ï¼Œè¯¥åŠŸèƒ½å°šæœªå®ç°ï¼Œå…ˆç”¨resè¿”å›æ¶ˆæ¯
                 if(user.verify_phone)
                 {
                     res.send({status:'already_verified'});
                 }
                 else if(user.phone == '')
                 {
-                    res.send({status:'invalid_phone_info'});
+                    res.send({status:'invalid_info'});
                 }
                 else
                 {
-                    // ³õÊ¼»¯µ±ÈÕÈÕÆÚ£¬ÉèÖÃÎªµ±ÈÕ0µãÕû
+                    // åˆå§‹åŒ–å½“æ—¥æ—¥æœŸï¼Œè®¾ç½®ä¸ºå½“æ—¥0ç‚¹æ•´
                     var today = new Date();
                     today.setHours(0);
                     today.setMinutes(0);
@@ -413,16 +457,16 @@ module.exports = function(app, express)
                         }
                         if(count < 5)
                         {
-                            // Éú³ÉËæ»úÂë£¬Ò»¹²6Î»Êı×Ö.
+                            // ç”Ÿæˆéšæœºç ï¼Œä¸€å…±6ä½æ•°å­—.
                             var code = '';
                             for(var i = 0; i < 6; i++)
                             {
-                                // Éú³É0 - 9 µÄÕûÊı
+                                // ç”Ÿæˆ0 - 9 çš„æ•´æ•°
                                 var index = Math.floor(Math.random() * 10);
                                 code += config.verify_code_container[index];
                             }
                             //console.log(code);
-                            // ÔÚÑéÖ¤Âë¼ÇÂ¼ÖĞÌíÉÏÒ»±Ê¡£
+                            // åœ¨éªŒè¯ç è®°å½•ä¸­æ·»ä¸Šä¸€ç¬”ã€‚
                             VerifyInfo.findOne({target:req.decoded.id, name:user.phone, action:config.verify_action.verify}, function(err, info)
                             {
                                 if(err)
@@ -430,24 +474,36 @@ module.exports = function(app, express)
                                     res.send({status:'err', message:err});
                                     return;
                                 }
-                                // Èç¹ûÒÔÇ°ÓĞ¹ı¼ÇÂ¼
+                                // å¦‚æœä»¥å‰æœ‰è¿‡è®°å½•
                                 if(info)
                                 {
-                                    info.code = code;
-                                    info.time = Date.now();
-                                    info.markModified('time');
-                                    info.save(function(err)
+                                    // æ£€æŸ¥æ˜¯å¦ç”³è¯·è¿‡äºé¢‘ç¹
+                                    var time_now = new Date();
+                                    var diff = parseInt(time_now.getTime() - info.time.getTime()) / (1000 * 60);
+
+                                    // é—´éš”ä¸‰åˆ†é’Ÿ
+                                    if(diff <= 3)
                                     {
-                                        if(err)
+                                        res.send({status:'too_frequently'});
+                                    }
+                                    else
+                                    {
+                                        info.code = code;
+                                        info.time = Date.now();
+                                        info.markModified('time');
+                                        info.save(function(err)
                                         {
-                                            res.send({status:'err', message:err});
-                                            return;
-                                        }
-                                        UserLog.create({target: req.decoded.id, action:config.user_action.req_verify_phone, ip:req.ip});
-                                        res.send({status:'success', code:code});
-                                    });
+                                            if(err)
+                                            {
+                                                res.send({status:'err', message:err});
+                                                return;
+                                            }
+                                            UserLog.create({target: req.decoded.id, action:config.user_action.req_verify_phone, ip:req.ip});
+                                            res.send({status:'success', code:code});
+                                        });
+                                    }
                                 }
-                                // Èç¹ûÒÔÇ°Ã»ÓĞ¼ÇÂ¼
+                                // å¦‚æœä»¥å‰æ²¡æœ‰è®°å½•
                                 else
                                 {
                                     var n_info = new VerifyInfo(
@@ -470,7 +526,7 @@ module.exports = function(app, express)
                                         res.send({status:'success', code:code, id: n_info._id});
                                     });
                                 }
-                            })
+                            });
                         }
                         else
                         {
@@ -486,7 +542,7 @@ module.exports = function(app, express)
         });
     });
 
-    // ÉêÇëÑéÖ¤email
+    // ç”³è¯·éªŒè¯email
     api.get('/req_verify/email', function(req,res)
     {
         User.findById(req.decoded.id).select('email verify_email').exec(function(err, user)
@@ -498,7 +554,7 @@ module.exports = function(app, express)
             }
             if(user)
             {
-                // ·¢ËÍµç×ÓÓÊ¼ş£¬ÓÉÓÚÏÖÔÚ¸Ã¹¦ÄÜÎ´ÊµÏÖ£¬ÔİÓÉ·¢ËÍ×Ö·û´®´úÌæ¡£
+                // å‘é€ç”µå­é‚®ä»¶ï¼Œç”±äºç°åœ¨è¯¥åŠŸèƒ½æœªå®ç°ï¼Œæš‚ç”±å‘é€å­—ç¬¦ä¸²ä»£æ›¿ã€‚
                 if(user.verify_email)
                 {
                     res.send({status:'already_verified'});
@@ -509,14 +565,14 @@ module.exports = function(app, express)
                 }
                 else
                 {
-                    // ³õÊ¼»¯µ±ÈÕÈÕÆÚ£¬ÉèÖÃÎªµ±ÈÕ0µãÕû
+                    // åˆå§‹åŒ–å½“æ—¥æ—¥æœŸï¼Œè®¾ç½®ä¸ºå½“æ—¥0ç‚¹æ•´
                     var today = new Date();
                     today.setHours(0);
                     today.setMinutes(0);
                     today.setSeconds(0);
                     today.setMilliseconds(0);
 
-                    // ²éÑ¯µ±ÈÕÊÇ·ñÒÑ¾­ÉêÇë³¬¹ı5´Î
+                    // æŸ¥è¯¢å½“æ—¥æ˜¯å¦å·²ç»ç”³è¯·è¶…è¿‡5æ¬¡
                     UserLog.count({target:req.decoded.id, action:config.user_action.req_verify_email, time:{'$gte': today}}, function(err,count)
                     {
                         if(err)
@@ -524,13 +580,71 @@ module.exports = function(app, express)
                             res.send({status:'err', message:err});
                             return;
                         }
-                       // console.log(count);
+                        //console.log(count);
                         if(count < 5)
                         {
-                            var token = CreateVerifyEmailToken(req.decoded.id, user.email);
-                            // ¼ÇÂ¼user log
-                            UserLog.create({target: req.decoded.id, action:config.user_action.req_verify_email, ip:req.ip});
-                            res.send({status:'success', token:token});
+                            VerifyInfo.findOne({target:req.decoded.id, name:user.email, action:config.verify_action.verify}, function(err, info)
+                            {
+                                if(err)
+                                {
+                                    res.send({status:'err', message:err});
+                                    return;
+                                }
+
+                                // ç”Ÿæˆtoken
+                                var token = CreateVerifyEmailToken(req.decoded.id, user.email);
+
+                                // å¦‚æœä»¥å‰æœ‰è¿‡è®°å½•
+                                if(info)
+                                {
+                                    // æ£€æŸ¥æ˜¯å¦ç”³è¯·è¿‡äºé¢‘ç¹
+                                    var time_now = new Date();
+                                    var diff = parseInt(time_now.getTime() - info.time.getTime()) / (1000 * 60);
+                                    //console.log(diff);
+                                    if(diff <= 1)
+                                    {
+                                        res.send({status:'too_frequently'});
+                                    }
+                                    else
+                                    {
+                                        info.time = Date.now();
+                                        info.markModified('time');
+                                        info.save(function(err)
+                                        {
+                                            if(err)
+                                            {
+                                                res.send({status:'err', message:err});
+                                                return;
+                                            }
+                                            UserLog.create({target: req.decoded.id, action:config.user_action.req_verify_email, ip:req.ip});
+
+                                            res.send({status:'success', token:token});
+                                        });
+                                    }
+                                }
+                                // å¦‚æœä»¥å‰æ²¡æœ‰è®°å½•
+                                else
+                                {
+                                    var n_info = new VerifyInfo(
+                                        {
+                                            target: req.decoded.id,
+                                            name: user.email,
+                                            code: 'no code',
+                                            action: config.verify_action.verify
+                                        }
+                                    );
+                                    n_info.save(function(err)
+                                    {
+                                        if(err)
+                                        {
+                                            res.send({status:'err', message:err});
+                                            return;
+                                        }
+                                        UserLog.create({target: req.decoded.id, action:config.user_action.req_verify_email, ip:req.ip});
+                                        res.send({status:'success', token:token});
+                                    });
+                                }
+                            });
                         }
                         else
                         {
@@ -554,7 +668,7 @@ module.exports = function(app, express)
             {
                 if(err)
                 {
-                    res.status(403).send({status:'err', message:err});
+                    res.send({status:'err', message:err});
                     return;
                 }
                 if(user)
@@ -573,23 +687,77 @@ module.exports = function(app, express)
             {
                 if(err)
                 {
-                    res.status(403).send({status:'err', message:err});
+                    res.send({status:'err', message:err});
                     return;
                 }
                 if(user)
                 {
-                    user.realname = req.body.realname;
-                    user.phone = req.body.phone;
-                    user.email = req.body.email;
-                    user.desc = req.body.desc;
+                    if(user.frozen)
+                    {
+                        res.send({status:'user_frozen'});
+                        return;
+                    }
 
+                    // æ­¤å¤„è®¾ç½®é™åˆ¶ï¼Œå·²ç»éªŒè¯çš„äº†ä¿¡æ¯ä¸èƒ½ä¿®æ”¹ã€‚ä½œä¸ºç”¨æˆ·åçš„ä¿¡æ¯ï¼ˆé‚®ç®±åœ°å€ï¼Œæ‰‹æœºå·ï¼‰ï¼Œä¸èƒ½ä¿®æ”¹ã€‚
+                    //user.nickname = req.body.nickname;
+                    if(!user.verified_real_name && req.body.realname)
+                    {
+                        if(!config.checkRealName(req.body.realname))
+                        {
+                            res.send({status:'invalid_input'});
+                            return;
+                        }
+                        user.realname = req.body.realname;
+                    }
+
+                    if(!user.verify_real_name && req.body.gender)
+                    {
+                        if(req.body.gender == 1)
+                            user.gender = 'ç”·';
+                        else
+                            user.gender = 'å¥³';
+                    }
+
+                    if(!user.verify_phone && user.username_link != 'phone' && req.body.phone)
+                    {
+                        if(!config.checkPhone(req.body.phone))
+                        {
+                            res.send({status:'invalid_input'});
+                            return;
+                        }
+                        user.phone = req.body.phone;
+                    }
+
+                    if(!user.verify_email && user.username_link != 'email' && req.body.phone)
+                    {
+                        if(!config.checkEmail(req.body.email))
+                        {
+                            res.send({status:'invalid_input'});
+                            return;
+                        }
+                        user.email = req.body.email;
+                    }
+
+                    // è¿™ä¸ªéšä¾¿ä¿®æ”¹ï¼Œåªè¦å­—æ•°ä¸è¶…å°±è¡Œ
+                    if(req.body.desc)
+                    {
+                        if(!config.checkUserDesc(req.body.desc))
+                        {
+                            res.send({status:'invalid_input'});
+                            return;
+                        }
+                        user.desc = req.body.desc;
+                    }
+
+                    //console.log(user);
                     user.save(function(err)
                     {
                         if(err)
                         {
-                            res.status(403).send({status:'err', message:err});
+                            res.send({status:'err', message:err});
                             return;
                         }
+
                         res.send({status:'success'});
                     });
                 }
@@ -600,13 +768,18 @@ module.exports = function(app, express)
             });
         });
 
-    api.post('/password', function(req,res)
+    api.post('/change_password', function(req,res)
     {
+        if(!config.checkPassword(req.body.password))
+        {
+            res.send({status:'invalid_password'});
+            return;
+        }
         User.findById(req.decoded.id).select('password').exec(function(err, user)
         {
             if(err)
             {
-                res.status(403).send({status:'err', message: err});
+                res.send({status:'err', message: err});
                 return;
             }
             if(user)
@@ -619,7 +792,7 @@ module.exports = function(app, express)
                     {
                         if(err)
                         {
-                            res.send({success: false, message: err});
+                            res.send({status:'err', message: err});
                             return;
                         }
                         var token = CreateToken(user);
@@ -639,7 +812,7 @@ module.exports = function(app, express)
         });
     });
 
-    // ÉÏ´«Í¼Æ¬
+    // ä¸Šä¼ å›¾ç‰‡
     api.post('/pic', function(req,res)
     {
         res.send({status:'function_not_avaliable'});

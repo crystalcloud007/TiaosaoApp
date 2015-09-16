@@ -6,32 +6,43 @@
     <base href="/">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/tiaosao.css" rel="stylesheet">
+    <script src="ckeditor/ckeditor.js"></script>
     <script src="lib/angular.min.js"></script>
     <script src="lib/angular-route.min.js"></script>
     <script src="js/services/AuthService.js"></script>
     <script src="js/services/ConfigService.js"></script>
     <script src="js/controllers/HomeCtrl.js"></script>
+    <script src="js/controllers/EntryCtrl.js"></script>
+    <script src="js/controllers/UserCtrl.js"></script>
     <script src="app.js"></script>
     <script src="appRoute.js"></script>
-    <title>跳骚网</title>
+    <title>跳骚市场</title>
 </head>
 <body>
     <header ng-controller="HomeController as Home">
         <nav class="nav navbar-default navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-thumbs-up">跳骚网</span></a>
+                    <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-thumbs-up">跳骚市场</span></a>
                 </div>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
-                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/signup">注册</a></li>
-                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/login">登录</a></li>
-                        <li role="presentation"><a href="/">免费发布信息</a> </li>
-                        <!--li ng-if="Home.loggedIn" role="presentation">
-                            <a href="javascritp:void(0)">你好，{{Home.user.username}}</a>
+                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/{{Home.c_local}}/signup">注册</a></li>
+                        <li ng-if="!Home.loggedIn" role="presentation"><a href="/{{Home.c_local}}/login">登录</a></li>
+                        <li role="presentation"><a href="/{{Home.c_local}}/new_entry" target="_blank">免费发布信息</a> </li>
+                        <!--li class="dropdown" role="presentation" ng-if="Home.loggedIn">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                我的跳骚<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/profile">查看个人信息</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a ng-click="Home.logOut()" href="javascript:void(0)">退出登录</a></li>
+                            </ul>
                         </li-->
                         <li ng-if="Home.loggedIn" role="presentation">
-                            <a href="#">查看个人信息</a>
+                            <a href="/{{Home.c_local}}/profile">我的跳骚</a>
                         </li>
                         <li ng-if="Home.loggedIn" role="presentation">
                             <a ng-click="Home.logOut()" href="javascript:void(0)">退出登录</a>
@@ -44,7 +55,7 @@
     <hr/>
     <main>
         <!--div class="container">
-            <p class="col-md-12">如果显示25，前端代码夹在成功：{{5*5}}</p>
+            <p class="col-md-12">如果显示25，前端代码加载成功：{{5*5}}</p>
         </div-->
         <div ng-view></div>
     </main>

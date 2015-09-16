@@ -28,9 +28,191 @@ angular.module('ConfigService',[])
             'signup_password_check_invalid':'两次输入不一致。',
             'signup_password_check_ok':'OK',
             'signup_post_invalid':'请将所有信息填写正确。',
+            'profile_invalid_user_desc':'请填写简介描述，2000个字符以内。',
+            'profile_blank_realname':'请填写真实姓名。',
+            'profile_invalid_realname':'请按照正确的格式填写,如张无忌。支持3-9个汉字。',
+            'profile_get_err':'出错了，请重新登录再试。',
+            'profile_placeholder_realname':'请填写真实姓名。',
+            'profile_placeholder_phone':'请填写手机号码。',
+            'profile_placeholder_email':'请填写电子邮箱地址。',
+            'profile_placeholder_desc':'请填写个人描述。',
+            'profile_success_upload_profile':'信息更新成功。',
+            'profile_success_change_p':'密码修改成功。',
+            'profile_frozen_user':'操作失败，当前用户被冻结，请尽快咨询管理员。',
+            'profile_invalid_password':'原始密码错误，修改失败。',
+            'profile_active_phone_success':'手机号码验证成功！',
+            'profile_active_phone_invalid':'验证码错误，请重新输入。',
+            'profile_active_phone_already':'已经验证成功啦。',
+            'profile_active_phone_expired':'验证码过期，请重新申请。',
+            'profile_req_active_phone_success':'验证码成功发送至指定手机，请查收。',
+            'profile_req_active_phone_invalid':'请先填写手机号码，再申请验证。',
+            'profile_req_active_phone_already':'您已经验证过手机了。',
+            'profile_req_active_phone_too_freq':'申请过于频繁，请稍后再试。',
+            'profile_req_active_phone_too_many':'今日已经申请太多次啦，请明天再试。',
+            'profile_req_active_email_success':'验证邮件已发送，请登录邮箱，并按提示操作。',
+            'profile_req_active_email_invalid':'请先填写邮箱地址，再申请验证。',
+            'profile_req_active_email_already':'邮箱已经验证成功。',
+            'profile_req_active_email_too_many':'今日已经申请太多次啦，请明天再试。',
+            'profile_req_active_email_too_freq':'申请过于频繁，请稍后再试。',
+            'profile_code_verify_phone_invalid':'格式错误，应填写6位数字。',
+            'profile_code_verify_phone_blank':'请填写发送至手机的6为验证码。',
+            'profile_entry_list_delete_success':'删除成功。',
             'captcha_blank':'请输入在图片中看到的验证码。',
             'captcha_invalid':'验证码错误。',
-            'captcha_ok':'验证码正确'
+            'captcha_ok':'验证码正确',
+            'entry_upload_invalid':'信息输入有误，请重试！',
+            'entry_upload_too_many':'已达到今日发帖上限，发帖失败。',
+            'entry_edit_invalid_input':'输入格式有误，请改正后重试。',
+            'entry_edit_not_owner':'没有修改权限。'
         };
         return config;
-    });
+    })
+    .factory('TextCheck', [function()
+    {
+        var check = {};
+
+        check.matchRealName = function(text)
+        {
+            var returnParam = '';
+            if(text == '' || text == undefined || text == null)
+            {
+                returnParam = 'blank';
+                return returnParam;
+            }
+            var reg = /^(([a-zA-Z\u2000]{5,20})|([\u4E00-\u9FA5]{2,30}))$/;
+            var valid = reg.test(text);
+            if(valid)
+            {
+                returnParam = 'valid';
+            }
+            else
+            {
+                returnParam = 'invalid';
+            }
+            return returnParam;
+        };
+
+        check.matchUserDesc = function(text)
+        {
+            var reg = /[*]{0,2000}/;
+            return reg.test(text);
+        };
+
+        check.matchEmail = function(text)
+        {
+            var returnParam = '';
+            if(text == '' || text == undefined || text == null)
+            {
+                returnParam = 'blank';
+                return returnParam;
+            }
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            var valid = reg.test(text);
+            if(valid)
+            {
+                returnParam = 'valid';
+            }
+            else
+            {
+                returnParam = 'invalid';
+            }
+            return returnParam;
+        };
+
+        check.matchPhone = function(text)
+        {
+            var returnParam = '';
+            if(text == '' || text == undefined || text == null)
+            {
+                returnParam = 'blank';
+                return returnParam;
+            }
+            var reg = /^((\+?86)|(\(\+86\)))?(13[0123456789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/;
+            var valid = reg.test(text);
+            if(valid)
+            {
+                returnParam = 'valid';
+            }
+            else
+            {
+                returnParam = 'invalid';
+            }
+            return returnParam;
+        };
+
+        check.matchPassword = function(pass)
+        {
+            var returnParam = '';
+            if(pass == '' || pass == undefined || pass == null)
+            {
+                returnParam = 'blank';
+                return returnParam;
+            }
+            var reg = /^[a-z0-9A-Z]{6,16}$/;
+            var valid = reg.test(pass);
+            if(valid)
+            {
+                returnParam = 'valid';
+            }
+            else
+            {
+                returnParam = 'invalid';
+            }
+            return returnParam;
+        };
+
+        check.doubleCheckPassword = function(pass_origin, pass_check)
+        {
+            var returnParam = '';
+            if(pass_check == '' || pass_check == undefined || pass_check == null)
+            {
+                returnParam = 'blank';
+                return returnParam;
+            }
+
+            if(pass_origin == pass_check)
+            {
+                returnParam = 'valid';
+            }
+            else
+            {
+                returnParam = 'invalid';
+            }
+            return returnParam;
+        };
+
+        return check;
+    }])
+    // 负责检查和记录用户当前地理位置
+    .factory('LocationChecker',['$location', '$route','$rootScope', function($location, $route, $rootScope)
+    {
+        var checker = {};
+
+        checker.current_location = 'xxx';
+        checker.getLocationFromServer = function()
+        {
+            // 上云之后才能发挥作用，现在只用来测试基本功能
+            checker.current_location = 'bj';
+            $location.path('/' + checker.current_location);
+        };
+        checker.getLocationFromRouteParams = function()
+        {
+            checker.current_location = $route.current.params.city;
+            // 如果city是err，则重新检测地点 -- 只有在not_found中才会遇到
+            if(checker.current_location == 'err')
+            {
+                // 上云之后才能发挥作用，现在只用来做测试
+                checker.current_location = 'bj';
+                $location.path('/' + checker.current_location + '/not_found');
+            }
+            $rootScope.current_geo_city = checker.current_location;
+            //console.log('RESOLVE时获取的地点是：' + $rootScope.current_geo_city);
+        };
+        checker.getLocation = function()
+        {
+            //console.log('从服务中拉取的地址是：' + checker.current_location);
+            return checker.current_location;
+        };
+
+        return checker;
+    }]);

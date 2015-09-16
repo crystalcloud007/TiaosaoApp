@@ -1,0 +1,61 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_o_price_e">价格：</label>
+    <div class="col-md-4">
+        <input id="re_sell_o_price_e" type="text" name="re_sell_o_price_e" ng-model="entry_upload.desc.price"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如100" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_sell_o_price_e.$valid"></span>
+        <p ng-if="entryEditForm.re_sell_o_price_e.$invalid&&entryEditForm.re_sell_o_price_e.$dirty" class="help-block label label-warning">
+            请填写有效价格，2-5位整数。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">万元</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_o_name_b_e">楼盘名称：</label>
+    <div class="col-md-6">
+        <input id="re_sell_o_name_b_e" type="text" name="re_sell_o_name_b_e" ng-model="entry_upload.desc.name_building"
+               ng-pattern="/^[\u4e00-\u9fa5][\u4e00-\u9fa5A-Z0-9]{1,9}$/"
+               ng-required="true" class="form-control input-md" placeholder="楼盘名称" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_sell_o_name_b_e.$valid"></span>
+        <p ng-if="entryEditForm.re_sell_o_name_b_e.$invalid&&entryEditForm.re_sell_o_name_b_e.$dirty" class="help-block label label-warning">
+            填写楼盘名称，2-10个字符，支持汉字、数字和大写字母。
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_sell_o_type_e">楼盘类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="re_sell_o_type_e">
+            <option value="写字楼">写字楼</option>
+            <option value="商务中心">商务中心</option>
+            <option value="商住公寓">商住公寓</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_o_size_e">面积：</label>
+    <div class="col-md-4">
+        <input id="re_sell_o_size_e" type="text" name="re_sell_o_size_e" ng-model="entry_upload.desc.size"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_sell_o_size_e.$valid"></span>
+        <p ng-if="entryEditForm.re_sell_o_size_e.$invalid&&entryEditForm.re_sell_o_size_e.$dirty" class="help-block label label-warning">
+            请填写有效面积，2-5位整数。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">平米</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_sell_o_reg_e">是否可注册：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.can_reg" ng-required="true" id="re_sell_o_reg_e">
+            <option value="可注册">可注册</option>
+            <option value="不可注册">不可注册</option>
+        </select>
+    </div>
+</div>

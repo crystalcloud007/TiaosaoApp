@@ -10,23 +10,24 @@ var UserSchema = new Schema(
         username: {type:String, required:true, index:{unique: true}},
         password: {type:String, required:true, select: false},
         realname: {type:String, default:''},
+        gender:{type:String,default:'ç”·'},
         pic_url: {type:String, default:''},
         phone:{type: String, default:''},
         email:{type: String, default:''},
         desc:{type:String, default:''},
-        level:Number,
-        credit:{type:Number, default:0},                    // ĞÅÓÃÖµ£¬¼ÇÂ¼³äÖµÊı
-        username_link: String,                              // ÓÃ»§ÃûÊÇÊÖ»úºÅ»¹ÊÇÓÊÏäµØÖ·¡£
-        verify_email: {type: Boolean, default: false},      // ÊÇ·ñÑéÖ¤ÁËÓÊ¼ş
-        verify_phone: {type:Boolean, default: false},       // ÊÇ·ñÑéÖ¤ÁËÊÖ»ú
-        verify_real_name:{type:Boolean, default: false},    // ÊÇ·ñ½øĞĞÁËÊµÃûÑéÖ¤
+        entry_per_day:Number,                               // ç”¨æˆ·æ¯å¤©èƒ½å‘å¤šå°‘å¸–å­
+        credit:{type:Number, default:0},                    // ä¿¡ç”¨å€¼ï¼Œè®°å½•å……å€¼æ•°
+        username_link: String,                              // ç”¨æˆ·åæ˜¯æ‰‹æœºå·è¿˜æ˜¯é‚®ç®±åœ°å€ã€‚
+        verify_email: {type: Boolean, default: false},      // æ˜¯å¦éªŒè¯äº†é‚®ä»¶
+        verify_phone: {type:Boolean, default: false},       // æ˜¯å¦éªŒè¯äº†æ‰‹æœº
+        verify_real_name:{type:Boolean, default: false},    // æ˜¯å¦è¿›è¡Œäº†å®åéªŒè¯
+        vip:{type:Number,default:0},                        // è®°å½•VIPç­‰çº§ï¼Œå°äºç­‰äº0ä¸ºéVIP
         frozen: {type: Boolean, default: false},
-        //posts_count_today: {type:Number, default:0},      // ·¢Ìû´ÎÊı£¬ÒÆ¶¯µ½USER LOGÖĞ
         time_of_reg:{type:Date, default: Date.now()}
     }
 );
 
-// HashÃÜÂë
+// Hashå¯†ç 
 UserSchema.pre('save', function(next)
 {
     var user = this;
@@ -41,7 +42,7 @@ UserSchema.pre('save', function(next)
     });
 });
 
-// ±È½ÏÃÜÂë
+// æ¯”è¾ƒå¯†ç 
 UserSchema.methods.comparePassword = function(password)
 {
     var user = this;

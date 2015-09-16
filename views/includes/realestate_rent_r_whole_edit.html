@@ -1,0 +1,140 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_price_E">租金：</label>
+    <div class="col-md-4">
+        <input id="re_rent_r_w_price_E" type="text" name="re_rent_r_w_price_E" ng-model="entry_upload.desc.price"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_rent_r_w_price_E.$valid"></span>
+        <p ng-if="entryEditForm.re_rent_r_w_price_E.$invalid&&entryEditForm.re_rent_r_w_price_E.$dirty" class="help-block label label-warning">
+            请填写有效月租金，2-5位数字。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">元/月</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_name_r_E">小区名称：</label>
+    <div class="col-md-6">
+        <input id="re_rent_r_w_name_r_E" type="text" name="re_rent_r_w_name_r_E" ng-model="entry_upload.desc.name_residence"
+               ng-pattern="/^[\u4e00-\u9fa5][\u4e00-\u9fa5A-Z0-9]{1,9}$/"
+               ng-required="true" class="form-control input-md" placeholder="如XX小区" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_rent_r_w_name_r_E.$valid"></span>
+        <p ng-if="entryEditForm.re_rent_r_w_name_r_E.$invalid&&entryEditForm.re_rent_r_w_name_r_E.$dirty" class="help-block label label-warning">
+            填写小区名称，2-10个字符，支持汉字、数字和大写字母。
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_type_E">户型结构：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="re_rent_r_w_type_E">
+            <option value="四室两厅双卫">四室两厅双卫</option>
+            <option value="四室两厅独卫">四室两厅独卫</option>
+            <option value="四室一厅双卫">四室一厅双卫</option>
+            <option value="四室一厅独卫">四室一厅独卫</option>
+            <option value="三室两厅双卫">三室两厅双卫</option>
+            <option value="三室两厅独卫">三室两厅独卫</option>
+            <option value="三室一厅双卫">三室一厅双卫</option>
+            <option value="三室一厅独卫">三室一厅独卫</option>
+            <option value="二室一厅">二室一厅</option>
+            <option value="一室一厅">一室一厅</option>
+            <option value="大开间">大开间</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_size_E">面积：</label>
+    <div class="col-md-4">
+        <input id="re_rent_r_w_size_E" type="text" name="re_rent_r_w_size_E" ng-model="entry_upload.desc.size"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_rent_r_w_size_E.$valid"></span>
+        <p ng-if="entryEditForm.re_rent_r_w_size_E.$invalid&&entryEditForm.re_rent_r_w_size_E.$dirty" class="help-block label label-warning">
+            请填写有效面积，2-4位数字。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">平米</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_floor_pos_E">所在楼层：</label>
+    <div class="col-md-4">
+        <input id="re_rent_r_w_floor_pos_E" type="text" name="re_rent_r_w_floor_pos_E" ng-model="entry_upload.desc.floor_pos"
+               ng-pattern="/^[1-5][0-9]{0,1}$/"
+               ng-required="true" class="form-control input-md" placeholder="如10" maxlength="2">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_rent_r_w_floor_pos_E.$valid"></span>
+        <p ng-if="entryEditForm.re_rent_r_w_floor_pos_E.$invalid&&entryEditForm.re_rent_r_w_floor_pos_E.$dirty" class="help-block label label-warning">
+            请填写楼层数，1-2位数字。
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_direction_E">朝向：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.direction" ng-required="true" id="re_rent_r_w_direction_E">
+            <option value="东">东</option>
+            <option value="南">南</option>
+            <option value="西">西</option>
+            <option value="北">北</option>
+            <option value="东南">东南</option>
+            <option value="东北">东北</option>
+            <option value="西南">西南</option>
+            <option value="西北">西北</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_decoration_E">装修类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.decoration" ng-required="true" id="re_rent_r_w_decoration_E">
+            <option value="毛胚">毛胚</option>
+            <option value="简单装修">简单装修</option>
+            <option value="中等装修">中等装修</option>
+            <option value="精装修">精装修</option>
+            <option value="豪华装修">豪华装修</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_model_E">房屋类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.model" ng-required="true" id="re_rent_r_w_model_E">
+            <option value="普通住宅">普通住宅</option>
+            <option value="商住两用">商住两用</option>
+            <option value="公寓">公寓</option>
+            <option value="平房">平房</option>
+            <option value="别墅">别墅</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_type_deposit_E">支付方式：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_deposit" ng-required="true" id="re_rent_r_w_type_deposit_E">
+            <option value="押一付三">押一付三</option>
+            <option value="押二付三">押二付三</option>
+            <option value="押一付二">押一付二</option>
+            <option value="押二付二">押二付二</option>
+            <option value="押一付一">押一付一</option>
+            <option value="年付">年付</option>
+            <option value="半年付">半年付</option>
+            <option value="面议">面议</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_r_w_t_move_in_E">最早入住日期：</label>
+    <div class="col-md-6">
+        <input id="re_rent_r_w_t_move_in_E" type="text" name="re_rent_r_w_t_move_in_E" ng-model="entry_upload.desc.time_move_in"
+               ng-pattern="/^20[1-9][0-9]-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$/"
+               ng-required="true" class="form-control input-md" placeholder="如2000-06-01" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_rent_r_w_t_move_in_E.$valid"></span>
+        <p ng-if="entryEditForm.re_rent_r_w_t_move_in_E.$invalid&&entryEditForm.re_rent_r_w_t_move_in_E.$dirty" class="help-block label label-warning">
+            请按照yyyy-mm-dd格式输入有效的时间，如2010-06-01。
+        </p>
+    </div>
+</div>

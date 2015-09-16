@@ -1,0 +1,391 @@
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active" ng-if="Profile.nav_check_info">
+            <a href="javascript:void(0)">查看资料</a>
+        </li>
+        <li role="presentation"  ng-if="!Profile.nav_check_info">
+            <a href="javascript:void(0)" ng-click="Profile.navCheckInfo()">查看资料</a>
+        </li>
+        <li role="presentation" class="active" ng-if="Profile.nav_modify_info">
+            <a href="javascript:void(0)">修改资料</a>
+        </li>
+        <li role="presentation"  ng-if="!Profile.nav_modify_info">
+            <a href="javascript:void(0)" ng-click="Profile.navModifyInfo()">修改资料</a>
+        </li>
+        <li role="presentation" class="active" ng-if="Profile.nav_modify_password">
+            <a href="javascript:void(0)">修改密码</a>
+        </li>
+        <li role="presentation" ng-if="!Profile.nav_modify_password">
+            <a href="javascript:void(0)" ng-click="Profile.navModifyPassword()">修改密码</a>
+        </li>
+        <li role="presentation" class="active" ng-if="Profile.nav_check_posts">
+            <a href="javascript:void(0)">我的发布</a>
+        </li>
+        <li role="presentation" ng-if="!Profile.nav_check_posts">
+            <a href="javascript:void(0)" ng-click="Profile.navCheckPosts()">我的发布</a>
+        </li>
+    </ul>
+    <hr/>
+</div>
+<div class="container" ng-if="Profile.nav_check_info">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-3 text-right"><h4>用户名</h4></div>
+                    <div class="col-md-6 text-left"><h4>{{Profile.profile.username}}</h4></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 text-right"><h4>真实姓名</h4></div>
+                    <div class="col-md-6 text-left"><h4>{{Profile.profile.realname}}</h4></div>
+                    <div class="col-md-2">
+                        <h4 class="text-right">
+                            <a href="/{{Profile.location}}/help/req_verify_real_name" ng-if="!Profile.profile.verify_real_name" >
+                                申请验证
+                            </a>
+                        </h4>
+                        <h4 class="text-right" ng-if="Profile.profile.verify_real_name" class="text-right">
+                            已验证
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </h4>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 text-right"><h4>性别</h4></div>
+                    <div class="col-md-6 text-left"><h4>{{Profile.profile.gender}}</h4></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-1"></div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-3 text-right"><h4>手机号码</h4></div>
+                    <div class="col-md-6 text-left"><h4>{{Profile.profile.phone}}</h4></div>
+                    <div class="col-md-2">
+                        <h4 class="text-right">
+                            <a href="javascript:void(0)" ng-if="!Profile.panel_verify_phone&&!Profile.profile.verify_phone"
+                               ng-click="Profile.touchPanelPhone()">
+                                申请验证
+                            </a>
+                            <a href="javascript:void(0)" ng-click="Profile.touchPanelPhone()"
+                               ng-if="Profile.panel_verify_phone&&!Profile.profile.verify_phone">关闭
+                            </a>
+                        </h4>
+                        <h4 ng-if="Profile.profile.verify_phone" class="text-right">
+                            已验证
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </h4>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <hr ng-if="Profile.panel_verify_phone&&!Profile.profile.verify_phone"/>
+                <div class="row" ng-if="Profile.panel_verify_phone&&!Profile.profile.verify_phone">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-8">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">输入验证码</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control input-md" type="text" placeholder="输入验证码" maxlength="6" ng-model="Profile.code_verify_phone"
+                                           ng-click="Profile.touchCodeVerifyPhone()" ng-blur="Profile.checkCodeVerifyPhone()">
+                                        <span class="help-block alert-warning"
+                                              ng-if="Profile.touched_code_verify_phone&&!Profile.valid_code_verify_phone">
+                                            {{Profile.msg_code_verify_phone}}
+                                        </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-primary btn-sm" ng-click="Profile.verifyPhone()">
+                                        提交验证码
+                                    </button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-default btn-sm" ng-click="Profile.getCodeVerifyPhone()" ng-if="Profile.can_send_phone_code">
+                                        发送验证码
+                                    </button>
+                                    <button class="btn btn-default btn-sm" ng-if="!Profile.can_send_phone_code" disabled="disabled">
+                                        {{Profile.msg_disable_send_code}}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <hr ng-if="Profile.panel_verify_phone&&!Profile.profile.verify_phone"/>
+                <div class="row">
+                    <div class="col-md-3 text-right"><h4>电子邮箱</h4></div>
+                    <div class="col-md-6 text-left"><h4>{{Profile.profile.email}}</h4></div>
+                    <div class="col-md-2">
+                        <h4 class="text-right">
+                            <a href="javascript:void(0)" ng-click="Profile.activateEmail()"
+                               ng-if="!Profile.profile.verify_email">
+                                申请验证
+                            </a>
+                        </h4>
+                        <h4 ng-if="Profile.profile.verify_email" class="text-right">
+                            已验证
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </h4>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4 class="text-right">每日发帖上限</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-left">{{Profile.profile.entry_per_day}}</h4>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4 class="text-right">简介</h4>
+                    </div>
+                    <div class="col-md-9">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <div tsshowhtml content="Profile.profile.desc"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<div class="container" ng-if="Profile.nav_modify_info">
+    <div  class="alert alert-danger alert-dismissable" role="alert" ng-if="Profile.err_upload_profile">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeErrBanner()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Profile.msg_upload_profile}}</strong>
+    </div>
+    <div  class="alert alert-success alert-dismissable" role="alert" ng-if="Profile.success_upload_profile">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeSccBanner()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Profile.msg_upload_profile}}</strong>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group has-feedback" ng-if="Profile.can_modify_realname">
+            <label class="col-md-4 control-label">真实姓名：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="text" ng-model="Profile.profile_upload.realname"
+                       placeholder="{{Profile.placeholder_realname}}" maxlength="20"
+                        ng-click="Profile.touchRealName()" ng-blur="Profile.checkRealName()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_realname"></span>
+                <div ng-if="Profile.touched_realname && !Profile.valid_realname" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_realname}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-if="!Profile.can_modify_realname">
+            <label class="col-md-4 control-label">真实姓名：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" placeholder="{{Profile.placeholder_realname}}" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">选择性别：</label>
+            <div class="col-md-4">
+                <label class="radio-inline">
+                    <input type="radio" value="1" ng-model="Profile.profile_upload.gender">
+                    男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="0" ng-model="Profile.profile_upload.gender">
+                    女
+                </label>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-if="Profile.can_modify_phone">
+            <label class="col-md-4 control-label">手机号码：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="text" ng-model="Profile.profile_upload.phone"
+                       placeholder="{{Profile.placeholder_phone}}" maxlength="11"
+                       ng-click="Profile.touchPhone()" ng-blur="Profile.checkPhone()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_phone"></span>
+                <div ng-if="Profile.touched_phone && !Profile.valid_phone" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_phone}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-if="!Profile.can_modify_phone">
+            <label class="col-md-4 control-label">手机号码：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" placeholder="{{Profile.placeholder_phone}}" readonly>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-if="Profile.can_modify_email">
+            <label class="col-md-4 control-label">电子邮箱：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="text" ng-model="Profile.profile_upload.email"
+                       placeholder="{{Profile.placeholder_email}}" maxlength="50"
+                       ng-click="Profile.touchEmail()" ng-blur="Profile.checkEmail()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_email"></span>
+                <div ng-if="Profile.touched_email && !Profile.valid_email" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_email}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-if="!Profile.can_modify_email">
+            <label class="col-md-4 control-label">电子邮箱：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" placeholder="{{Profile.placeholder_email}}"  readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">简介：</label>
+            <div class="col-md-4"  ng-click="Profile.touchDesc()" ng-blur="Profile.checkDesc()">
+                <textarea ckeditor class="form-control" maxlength="500" ng-model="Profile.profile_upload.desc"
+                          placeholder="{{Profile.placeholder_desc}}" name="desc_area">
+                </textarea>
+                <div ng-if="Profile.touched_desc&&!Profile.valid_desc" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_desc}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button ng-click="Profile.uploadInfo()" class="btn btn-primary">修改</button>
+                <span class="label label-danger">{{Profile.msg_valid_upload}}</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container" ng-if="Profile.nav_modify_password">
+    <div  class="alert alert-danger alert-dismissable" role="alert" ng-if="Profile.err_change_p">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeErrBanner()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Profile.msg_change_p}}</strong>
+    </div>
+    <div  class="alert alert-success alert-dismissable" role="alert" ng-if="Profile.success_change_p">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeSccBanner()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{Profile.msg_change_p}}</strong>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group has-feedback">
+            <label class="col-md-4 control-label">原始密码：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="password" ng-model="Profile.password_o"
+                       placeholder="输入原始密码" maxlength="16"
+                       ng-click="Profile.touchPO()" ng-blur="Profile.checkPO()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_p_o"></span>
+                <div ng-if="Profile.touched_p_o && !Profile.valid_p_o" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_p_o}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="col-md-4 control-label">新的密码：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="password" ng-model="Profile.password"
+                       placeholder="输入新密码" maxlength="16"
+                       ng-click="Profile.touchP()" ng-blur="Profile.checkP()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_p"></span>
+                <div ng-if="Profile.touched_p && !Profile.valid_p" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_p}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label class="col-md-4 control-label">确认密码：</label>
+            <div class="col-md-4">
+                <input class="form-control input-md" type="password" ng-model="Profile.password_check"
+                       placeholder="确认新密码，两次输入需一致" maxlength="16"
+                       ng-click="Profile.touchPCheck()" ng-blur="Profile.checkPCheck()">
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="Profile.valid_p_check"></span>
+                <div ng-if="Profile.touched_p_check && !Profile.valid_p_check" class="help-block">
+                    <span class="label label-warning">{{Profile.msg_p_check}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button ng-click="Profile.changePassword()" class="btn btn-primary">确认</button>
+                <span class="label label-danger">{{Profile.msg_valid_change_p}}</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container" ng-if="Profile.nav_check_posts">
+    <div class="row">
+        <div  class="alert alert-danger alert-dismissable" role="alert" ng-if="Profile.err_entry_list">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeErrBanner()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{Profile.msg_entry_list}}</strong>
+        </div>
+        <div  class="alert alert-success alert-dismissable" role="alert" ng-if="Profile.success_entry_list">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="Profile.closeSccBanner()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{Profile.msg_entry_list}}</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <tr>
+                    <th>标题</th>
+                    <th>类别</th>
+                    <th>城市</th>
+                    <th class="text-right">动作</th>
+                </tr>
+                <tr ng-repeat="entry in Profile.entry_list">
+                    <td><a href="/{{Profile.location}}/detail/{{entry._id}}" target="_blank">{{entry.title}}</a></td>
+                    <td>{{entry.category_chn}}</td>
+                    <td>{{entry.region_city}}</td>
+                    <td class="text-right">
+                        <a href="javascript:void(0)" ng-click="Profile.deleteEntry(entry._id,entry)">删除</a>
+                        <a href="/{{Profile.location}}/edit/{{entry._id}}" target="_blank">修改</a>
+                    </td>
+                </tr>
+            </table>
+            <nav>
+                <ul class="pagination">
+                    <li ng-if="Profile.page_list_current<=1" class="disabled">
+                        <a href="javascript:void(0)"><span aria-hidden="true">&larr;</span>上一页</a>
+                    </li>
+                    <li ng-if="Profile.page_list_current>1">
+                        <a href="javascript:void(0)" ng-click="Profile.listPrevPage()">
+                            <span aria-hidden="true">&larr;</span>上一页
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a href="javascript:void(0)">
+                            {{Profile.page_list_current}} / {{Profile.page_list_total}}
+                        </a>
+                    </li>
+                    <li ng-if="Profile.page_list_current<Profile.page_list_total">
+                        <a href="javascript:void(0)" ng-click="Profile.listNextPage()">
+                            下一页<span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                    <li ng-if="Profile.page_list_current>=Profile.page_list_total" class="disabled">
+                        <a href="javascript:void(0)">下一页<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="sh_mobile_price_e">价格：</label>
+    <div class="col-md-4">
+        <input id="sh_mobile_price_e" type="text" name="sh_mobile_price_e" ng-model="entry_upload.desc.price"
+               ng-pattern="/^[1-9][0-9]{2,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如1000" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.sh_mobile_price_e.$valid"></span>
+        <p ng-if="entryEditForm.sh_mobile_price_e.$invalid&&entryEditForm.sh_mobile_price_e.$dirty" class="help-block label label-warning">
+            请填写有效价格，3-5位整数。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">元</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="sh_mobile_brand_e">品牌系列款式：</label>
+    <div class="col-md-6">
+        <input id="sh_mobile_brand_e" type="text" name="sh_mobile_brand_e" ng-model="entry_upload.desc.brand"
+               ng-pattern="/^[\s\S]{2,20}$/"
+               ng-required="true" class="form-control input-md" placeholder="品牌、型号、款式、颜色等信息" maxlength="20">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.sh_mobile_brand_e.$valid"></span>
+        <p ng-if="entryEditForm.sh_mobile_brand_e.$invalid&&entryEditForm.sh_mobile_brand_e.$dirty" class="help-block label label-warning">
+            请填写品牌款式，2-20个字符。
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="sh_mobile_aged_e">手机状况：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.aged" ng-required="true" id="sh_mobile_aged_e">
+            <option value="全新未拆封">全新未拆封</option>
+            <option value="全新已拆封">全新已拆封</option>
+            <option value="95成新">95成新</option>
+            <option value="9成新">9成新</option>
+            <option value="8成新">8成新</option>
+            <option value="7成新及以下">7成新及以下</option>
+        </select>
+    </div>
+</div>

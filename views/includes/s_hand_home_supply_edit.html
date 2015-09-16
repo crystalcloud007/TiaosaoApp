@@ -1,0 +1,98 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_price_e">价格：</label>
+    <div class="col-md-4">
+        <input id="sh_home_supply_price_e" type="text" name="sh_home_supply_price_e" ng-model="entry_upload.desc.price"
+               ng-pattern="/^[1-9][0-9]{1,4}$/"
+               ng-required="true" class="form-control input-md" placeholder="如1000" maxlength="5">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.sh_home_supply_price_e.$valid"></span>
+        <p ng-if="entryEditForm.sh_home_supply_price_e.$invalid&&entryEditForm.sh_home_supply_price_e.$dirty" class="help-block label label-warning">
+            请填写有效价格，2-5位整数。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">元</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="col-md-2 control-label" for="sh_home_supply_type_e">物品从属：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type" ng-required="true" id="sh_home_supply_type_e">
+            <option value="家电">家电</option>
+            <option value="家具">家具</option>
+            <option value="家居用品">家居用品</option>
+            <option value="母婴用品">母婴用品</option>
+        </select>
+    </div>
+</div>
+<div class="form-group" ng-if="entry_upload.desc.type=='家电'">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_type_sub_1_e">物品类别：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_sub" ng-required="true" id="sh_home_supply_type_sub_1_e">
+            <option value="电视机">电视机</option>
+            <option value="洗衣机">洗衣机</option>
+            <option value="空调">空调</option>
+            <option value="冰箱">冰箱</option>
+            <option value="冰柜">冰柜</option>
+            <option value="影音家电">影音家电</option>
+            <option value="生活家电">生活家电</option>
+            <option value="厨卫家电">厨卫家电</option>
+            <option value="其他家电">其他家电</option>
+        </select>
+    </div>
+</div>
+<div class="form-group" ng-if="entry_upload.desc.type=='家具'">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_type_sub_2_e">物品类别：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_sub" ng-required="true" id="sh_home_supply_type_sub_2_e">
+            <option value="床">床</option>
+            <option value="柜子">柜子</option>
+            <option value="架子">架子</option>
+            <option value="桌子">桌子</option>
+            <option value="椅子/凳">椅子/凳</option>
+            <option value="沙发">沙发</option>
+            <option value="茶几">茶几</option>
+            <option value="其他家具">其他家具</option>
+        </select>
+    </div>
+</div>
+<div class="form-group" ng-if="entry_upload.desc.type=='家居用品'">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_type_sub_3_e">物品类别：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_sub" ng-required="true" id="sh_home_supply_type_sub_3_e">
+            <option value="床上用品">床上用品</option>
+            <option value="布艺饰品">布艺饰品</option>
+            <option value="生活用品">生活用品</option>
+            <option value="灯具照明">灯具照明</option>
+            <option value="其他家居用品">其他家居用品</option>
+        </select>
+    </div>
+</div>
+<div class="form-group" ng-if="entry.desc.type=='母婴用品'">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_type_sub_4_e">物品类别：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.type_sub" ng-required="true" id="sh_home_supply_type_sub_4_e">
+            <option value="奶粉/营养辅食">奶粉/营养辅食</option>
+            <option value="喂养用品">喂养用品</option>
+            <option value="护理用品">护理用品</option>
+            <option value="婴幼服饰">婴幼服饰</option>
+            <option value="婴幼用品">婴幼用品</option>
+            <option value="童床童车">童床童车</option>
+            <option value="玩具">玩具</option>
+            <option value="早教用品">早教用品</option>
+            <option value="孕妈用品">孕妈用品</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="sh_home_supply_aged">物品状况：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.aged" ng-required="true" id="sh_home_supply_aged">
+            <option value="全新未拆封">全新未拆封</option>
+            <option value="全新已拆封">全新已拆封</option>
+            <option value="95成新">95成新</option>
+            <option value="9成新">9成新</option>
+            <option value="8成新">8成新</option>
+            <option value="7成新及以下">7成新及以下</option>
+        </select>
+    </div>
+</div>

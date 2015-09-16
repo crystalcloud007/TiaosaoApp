@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row" ng-if="phase==1">
+        <div class="col-md-2">广告</div>
+        <div class="col-md-8">
+            <h2 class="text-center">第一步 - 请选择类别</h2>
+            <div class="panel panel-default" ng-repeat="item_main in menu">
+                <h4><strong>{{item_main.chn}}</strong></h4>
+                <ul class="list-group list-inline">
+                    <li ng-repeat="item_sub in item_main.subs" class="list-group-item">
+                        <a href="javascript:void(0)" ng-click="getCategory(item_sub)">{{item_sub.chn}}</a>
+                        <b> | </b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">广告</div>
+    </div>
+    <div class="row" ng-if="phase==2">
+        <div class="col-md-2">广告</div>
+        <div class="col-md-8">
+            <h2 class="text-center">
+                第二步 - 填写内容
+                <small><a href="javascript:void(0)" ng-click="toPhase_1()"> 回到上一步</a></small>
+            </h2>
+            <hr/>
+            <form class="form form-horizontal" name="entryForm" role="form">
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 text-left" for="cate_cate">类别/城市：</label>
+                    <div class="col-md-6">
+                        <input id="cate_cate" placeholder="{{entry.category_chn}}" disabled class="form-control input-md">
+                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input id="cate_city" placeholder="{{entry.region_city}}" disabled class="form-control input-md">
+                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 text-left" for="title">标题：</label>
+                    <div class="col-md-10">
+                        <input id="title" type="text" name="title" ng-model="entry.title" ng-pattern="/^[\s\S]{6,30}$/" ng-required="true"
+                               class="form-control input-md" placeholder="请输入标题" maxlength="30">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.title.$valid"></span>
+                        <p ng-if="entryForm.title.$invalid&&entryForm.title.$dirty" class="help-block label label-warning">
+                            请输入标题，6-30个字符。
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 text-left" for="district">选择区/县：</label>
+                    <div class="col-md-10">
+                        <select id="district" ng-model="entry.region_district" ng-options="dist for dist in districts" ng-required="true"></select>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 text-left" for="addr">详细地址：</label>
+                    <div class="col-md-10">
+                        <input id="addr" type="text" name="r_addr" ng-model="entry.region_addr" ng-pattern="/^[\s\S]{6,40}$/" ng-required="true"
+                               class="form-control input-md" placeholder="请输入具体地址，或XX市XX区/县，或XX地区周边" maxlength="40">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.r_addr.$valid"></span>
+                        <p ng-if="entryForm.r_addr.$invalid&&entryForm.r_addr.$dirty" class="help-block label label-warning">
+                            请输入详细地址，6-40个字符。
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 text-left" for="con_n">联系人：</label>
+                    <div class="col-md-6">
+                        <input id="con_n" type="text" name="contact_n" ng-model="entry.contact_n" ng-pattern="/^[\u4E00-\u9FA5]{2,10}$/" ng-required="true"
+                               class="form-control input-md" placeholder="请用汉字输入联系人姓名" maxlength="10">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.contact_n.$valid"></span>
+                        <p ng-if="entryForm.contact_n.$invalid&&entryForm.contact_n.$dirty" class="help-block label label-warning">
+                            请正确输入联系人姓名，如：张无忌。
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 text-left" for="con_p">联系人手机：</label>
+                    <div class="col-md-6">
+                        <input id="con_p" type="text" name="contact_p" ng-model="entry.contact_p"
+                               ng-pattern="/^((\+?86)|(\(\+86\)))?(13[0123456789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/"
+                               ng-required="true" class="form-control input-md" placeholder="请输入联系人手机号码" maxlength="11">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.contact_p.$valid"></span>
+                        <p ng-if="entryForm.contact_p.$invalid&&entryForm.contact_p.$dirty" class="help-block label label-warning">
+                            请正确输入联系人手机号码，如13555555555。
+                        </p>
+                    </div>
+                </div>
+                <div ng-include="getIncludeUrl()"></div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 text-left" for="content">详细描述：</label>
+                    <div class="col-md-10">
+                        <textarea id="content" ckeditor class="form-control" maxlength="1000" ng-model="entry.content"
+                                  ng-pattern="/^[\s\S]{10,1000}$/"
+                                  placeholder="请输入详细描述信息。" name="content" ng-required="true">
+                        </textarea>
+                        <p ng-if="entryForm.content.$invalid&&entryForm.content.$dirty" class="help-block label label-warning">
+                            描述信息应多于20个字，控制在1000字以内。
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="loggedIn">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <button ng-if="entryForm.$invalid" disabled class="btn btn-primary">提交</button>
+                        <button ng-click="postEntry()" ng-if="entryForm.$valid" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </form>
+            <hr ng-if="err_upload"/>
+            <div ng-if="err_upload" class="alert alert-danger alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeErrBanner()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{msg_upload}}</strong>
+            </div>
+            <hr ng-if="!loggedIn"/>
+            <div class="row" ng-if="!loggedIn">
+                <div ng-include="'includes/login_and_signup.html'"></div>
+            </div>
+        </div>
+        <div class="col-md-2">广告</div>
+    </div>
+    <div class="row" ng-if="phase==3">
+        <div class="col-md-2">广告</div>
+        <div class="col-md-8">
+            <h2 class="text-center">第三步-信息发布成功</h2>
+            <form class="form form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="label control-label col-md-4" for="upload_pic">上传图片</label>
+                    <input id="upload_pic" type="file" class="input-file">
+                </div>
+            </form>
+            <hr/>
+            <p><a href="/{{current_city}}/detail/{{entry_id}}">点击查看帖子</a></p>
+        </div>
+        <div class="col-md-2">广告</div>
+    </div>
+</div>

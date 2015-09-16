@@ -1,0 +1,54 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_s_price">价格：</label>
+    <div class="col-md-4">
+        <input id="re_sell_s_price" type="text" name="re_sell_s_price" ng-model="entry.desc.price"
+               ng-pattern="/^[1-9][0-9]{0,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_sell_s_price.$valid"></span>
+        <p ng-if="entryForm.re_sell_s_price.$invalid&&entryForm.re_sell_s_price.$dirty" class="help-block label label-warning">
+            请填写有效金额，1-4位数字。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">万元</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_sell_s_type">商铺类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="re_sell_s_type">
+            <option value="商业街卖场">商业街卖场</option>
+            <option value="写字楼配套">写字楼配套</option>
+            <option value="住宅底商">住宅底商</option>
+            <option value="摊位柜台">摊位柜台</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_s_type_b">经营类别：</label>
+    <div class="col-md-4">
+        <input id="re_sell_s_type_b" type="text" name="re_sell_s_type_b" ng-model="entry.desc.type_business"
+               ng-pattern="/^[\u4e00-\u9fa5]{2,10}$/"
+               ng-required="true" class="form-control input-md" placeholder="如服装" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_sell_s_type_b.$valid"></span>
+        <p ng-if="entryForm.re_sell_s_type_b.$invalid&&entryForm.re_sell_s_type_b.$dirty" class="help-block label label-warning">
+            请填写经营类别，2-10个汉字，不支持标点符号和空格。
+        </p>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_sell_s_size">面积：</label>
+    <div class="col-md-4">
+        <input id="re_sell_s_size" type="text" name="re_sell_s_size" ng-model="entry.desc.size"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_sell_s_size.$valid"></span>
+        <p ng-if="entryForm.re_sell_s_size.$invalid&&entryForm.re_sell_s_size.$dirty" class="help-block label label-warning">
+            请填写有效面积，2-4位数字。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">平米</h4>
+    </div>
+</div>

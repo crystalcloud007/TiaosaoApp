@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var ADSchema = new Schema(
     {
         category:{type:String, required:true},              // 业务类型
+        type_display:{type:String, required:true},          // 播放方式，横幅或是页边什么的
         type_region:{type:String ,required:true},           // 区域类型：全国，某省还是某市
         region_prov:{type:String, default:''},              // 省名称
         region_city:{type:String, default:''},              // 市名称

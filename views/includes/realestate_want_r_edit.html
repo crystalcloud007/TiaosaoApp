@@ -1,0 +1,52 @@
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="entryEdit_expect">房屋类型期望：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.expect" ng-required="true" id="entryEdit_expect" name="entryEdit_expect">
+            <option value="四室两厅双卫">四室两厅双卫</option>
+            <option value="四室两厅独卫">四室两厅独卫</option>
+            <option value="四室一厅双卫">四室一厅双卫</option>
+            <option value="四室一厅独卫">四室一厅独卫</option>
+            <option value="三室两厅双卫">三室两厅双卫</option>
+            <option value="三室两厅独卫">三室两厅独卫</option>
+            <option value="三室一厅双卫">三室一厅双卫</option>
+            <option value="三室一厅独卫">三室一厅独卫</option>
+            <option value="二室一厅">二室一厅</option>
+            <option value="一室一厅">一室一厅</option>
+            <option value="大开间">大开间</option>
+            <option value="卧室带独卫">卧室带独卫</option>
+            <option value="卧室">卧室</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group form-inline">
+    <label class="control-label col-md-2 text-left" for="entryEdit_price">租金范围：</label>
+    <div class="col-md-10">
+        <select ng-model="entry_upload.desc.price" ng-required="true" id="entryEdit_price" name="entryEdit_price">
+            <option value="500元以下/月">500元以下/月</option>
+            <option value="500-1000元/月">500-1000元/月</option>
+            <option value="1000-1500元/月">1000-1500元/月</option>
+            <option value="1500-2000元/月">1500-2000元/月</option>
+            <option value="2000-2500元/月">2000-2500元/月</option>
+            <option value="2500-3000元/月">2500-3000元/月</option>
+            <option value="3000-3500元/月">3000-3500元/月</option>
+            <option value="3500-4000元/月">3500-4000元/月</option>
+            <option value="4000-4500元/月">4000-4500元/月</option>
+            <option value="4500-5000元/月">4500-5000元/月</option>
+            <option value="5000-5500元/月">5000-5500元/月</option>
+            <option value="5500元以上/月">5500元以上/月</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="entryEdit_t_move_in">最晚入住日期：</label>
+    <div class="col-md-6">
+        <input id="entryEdit_t_move_in" type="text" name="entryEdit_t_move_in" ng-model="entry_upload.desc.time_move_in"
+               ng-pattern="/^20[1-9][0-9]-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$/"
+               ng-required="true" class="form-control input-md" placeholder="如2000-06-01" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.entryEdit_t_move_in.$valid"></span>
+        <p ng-if="entryEditForm.entryEdit_t_move_in.$invalid&&entryEditForm.entryEdit_t_move_in.$dirty" class="help-block label label-warning">
+            请按照yyyy-mm-dd格式输入有效的时间，如2010-06-01。
+        </p>
+    </div>
+</div>

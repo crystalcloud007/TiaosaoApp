@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="col-md-12">
+        <p class="text-center">此处是广告的位置</p>
+    </div>
+    <div class="row">
+        <div class="col-md-2">留白处，会有广告</div>
+        <div class="col-md-8">
+            <div ng-include="getIncludeUrl()"></div>
+            <nav>
+                <ul class="pagination">
+                    <li ng-if="page_current>1">
+                        <a href="javascript:void(0)" ng-click="prevPage()"><span aria-hidden="true">&larr;</span>上一页</a>
+                    </li>
+                    <li class="disabled" ng-if="page_current<=1"><a href="javascript:void(0)"><span aria-hidden="true">&larr;</span>上一页</a></li>
+                    <li class="disabled">
+                        <a href="javascript:void(0)">{{page_current}} / {{page_total}}</a>
+                    </li>
+                    <li ng-if="page_current<page_total">
+                        <a href="javascript:void(0)" ng-click="nextPage()">下一页<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li class="disabled" ng-if="page_current>=page_total"><a href="javascript:void(0)">下一页<span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-2">留白处，会有广告</div>
+    </div>
+</div>

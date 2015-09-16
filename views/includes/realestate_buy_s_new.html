@@ -1,0 +1,80 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_buy_s_price_from">期望价格：</label>
+    <div class="col-md-3">
+        <input id="re_buy_s_price_from" type="text" name="re_buy_s_price_from" ng-model="entry.desc.price_from"
+               ng-pattern="/^[1-9][0-9]{0,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_s_price_from.$valid"></span>
+        <div class="help-block"
+             ng-if="(entryForm.re_buy_s_price_from.$invalid&&entryForm.re_buy_s_price_from.$dirty)||
+         (entryForm.re_buy_s_price_to.$invalid&&entryForm.re_buy_s_price_to.$dirty)">
+            <p class="label label-warning">
+                请填写有效金额，1-4位数字。后面的数字要大于前面的数字。
+            </p>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <h4>——</h4>
+    </div>
+    <div class="col-md-3">
+        <input id="re_buy_s_price_to" type="text" name="re_buy_s_price_to" ng-model="entry.desc.price_to"
+               ng-pattern="/^[1-9][0-9]{0,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_s_price_to.$valid"></span>
+    </div>
+    <div class="col-md-3">
+        <h4 class="text-left">万元</h4>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_buy_s_size_from">面积范围：</label>
+    <div class="col-md-3">
+        <input id="re_buy_s_size_from" type="text" name="re_buy_s_size_from" ng-model="entry.desc.size_from"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_s_size_from.$valid"></span>
+        <div class="help-block"
+             ng-if="(entryForm.re_buy_s_size_from.$invalid&&entryForm.re_buy_s_size_from.$dirty)||
+         (entryForm.re_buy_s_size_to.$invalid&&entryForm.re_buy_s_size_to.$dirty)">
+            <p class="label label-warning">
+                请填写有效面积，2-4位数字。后面的数字要大于前面的数字。
+            </p>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <h4>——</h4>
+    </div>
+    <div class="col-md-3">
+        <input id="re_buy_s_size_to" type="text" name="re_buy_s_size_to" ng-model="entry.desc.size_to"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_s_size_to.$valid"></span>
+    </div>
+    <div class="col-md-2">
+        <h4 class="text-left">平米</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_s_type">商铺类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="re_rent_s_type">
+            <option value="商业街卖场">商业街卖场</option>
+            <option value="写字楼配套">写字楼配套</option>
+            <option value="住宅底商">住宅底商</option>
+            <option value="摊位柜台">摊位柜台</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_s_type_b">经营类别：</label>
+    <div class="col-md-4">
+        <input id="re_rent_s_type_b" type="text" name="re_rent_s_type_b" ng-model="entry.desc.type_business"
+               ng-pattern="/^[\u4e00-\u9fa5]{2,10}$/"
+               ng-required="true" class="form-control input-md" placeholder="如服装" maxlength="10">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_rent_s_type_b.$valid"></span>
+        <p ng-if="entryForm.re_rent_s_type_b.$invalid&&entryForm.re_rent_s_type_b.$dirty" class="help-block label label-warning">
+            请填写经营类别，2-10个汉字，不支持标点符号和空格。
+        </p>
+    </div>
+</div>

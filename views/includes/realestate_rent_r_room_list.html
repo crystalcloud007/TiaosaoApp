@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div ng-repeat="entry in entries">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-hand-right"></span></h4>
+                        </div>
+                        <div class="col-md-11">
+                            <h4><a href="{{current_city}}/detail/{{entry._id}}" target="_blank">{{entry.title}}</a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-info-sign"></span></p>
+                        </div>
+                        <div class="col-md-11">
+                            <p>{{entry.desc.name_residence}}，{{entry.desc.type}}，{{entry.desc.decoration}}，{{entry.desc.type_room}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-map-marker"></span></p>
+                        </div>
+                        <p class="col-md-11">{{entry.region_district}}，{{entry.region_addr}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-picture"></span></p>
+                        </div>
+                        <div class="col-md-11">
+                            <p>{{entry.pic_count}}图</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center">{{entry.desc.price}}元/月</h4>
+                    <p class="text-center">{{entry.desc.gender}}</p>
+                    <p class="text-center">{{entry.desc.type_deposit}}</p>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>

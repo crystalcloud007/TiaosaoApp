@@ -1,0 +1,25 @@
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="serv_home_type">业务类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="serv_home_type">
+            <option value="搬家">搬家</option>
+            <option value="保姆/月嫂">保姆/月嫂</option>
+            <option value="家电维修">家电维修</option>
+            <option value="保洁清洗">保洁清洗</option>
+            <option value="房屋维修">房屋维修</option>
+            <option value="其他服务">其他服务</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="serv_home_short_desc">业务范围：</label>
+    <div class="col-md-6">
+        <input id="serv_home_short_desc" type="text" name="serv_home_short_desc" ng-model="entry.desc.short_desc"
+               ng-pattern="/^[\s\S]{2,20}$/"
+               ng-required="true" class="form-control input-md" placeholder="简要介绍一下业务范围，20个字符以内" maxlength="20">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.serv_home_short_desc.$valid"></span>
+        <p ng-if="entryForm.serv_home_short_desc.$invalid&&entryForm.serv_home_short_desc.$dirty" class="help-block label label-warning">
+            输入简要业务介绍，2-20个字符。
+        </p>
+    </div>
+</div>

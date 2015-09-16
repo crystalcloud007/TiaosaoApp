@@ -1,0 +1,45 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_d_price">租金：</label>
+    <div class="col-md-4">
+        <input id="re_rent_d_price" type="text" name="re_rent_d_price" ng-model="entry.desc.price"
+               ng-pattern="/^[1-9][0-9]{1,3}$/"
+               ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="4">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_rent_d_price.$valid"></span>
+        <p ng-if="entryForm.re_rent_d_price.$invalid&&entryForm.re_rent_d_price.$dirty" class="help-block label label-warning">
+            请填写有效租金，2-4位数字。
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h4 class="text-left">元/天</h4>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="re_rent_d_type">房屋类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="re_rent_d_type">
+            <option value="家庭旅馆">家庭旅馆</option>
+            <option value="酒店式公寓">酒店式公寓</option>
+            <option value="经济型酒店">经济型酒店</option>
+            <option value="宾馆招待所">宾馆招待所</option>
+            <option value="特色客栈">特色客栈</option>
+            <option value="星级酒店">星级酒店</option>
+            <option value="青年旅社">青年旅社</option>
+            <option value="其他类型">其他类型</option>
+        </select>
+    </div>
+</div>
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="re_rent_d_period_shortest">最短租期：</label>
+    <div class="col-md-2">
+        <input id="re_rent_d_period_shortest" type="text" name="re_rent_d_period_shortest" ng-model="entry.desc.period_shortest"
+               ng-pattern="/^[1-9][0-9]{0,1}$/"
+               ng-required="true" class="form-control input-md" placeholder="如10" maxlength="2">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_rent_d_period_shortest.$valid"></span>
+        <p ng-if="entryForm.re_rent_d_period_shortest.$invalid&&entryForm.re_rent_d_period_shortest.$dirty" class="help-block label label-warning">
+            请填写最短租期，1-2位数字。
+        </p>
+    </div>
+    <div class="col-md-8">
+        <h4 class="text-left">天</h4>
+    </div>
+</div>
