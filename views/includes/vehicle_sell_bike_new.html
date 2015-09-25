@@ -1,12 +1,12 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="v_buy_bike_price">价格：</label>
     <div class="col-md-4">
-        <input id="v_buy_bike_price" type="number" name="v_buy_bike_price" ng-model="entry.desc.price"
-               ng-pattern="/^[1-9][0-9]{1,4}$/"
+        <input id="v_buy_bike_price" type="text" name="v_buy_bike_price" ng-model="entry.desc.price"
+               ng-pattern="/^[1-9][0-9]{2,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如1000" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.v_buy_bike_price.$valid"></span>
         <p ng-if="entryForm.v_buy_bike_price.$invalid&&entryForm.v_buy_bike_price.$dirty" class="help-block label label-warning">
-            请填写有效价格，2-5位整数。
+            请填写有效价格，3-5位整数。
         </p>
     </div>
     <div class="col-md-4">

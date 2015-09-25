@@ -23,8 +23,6 @@ var Entry = new Schema(
         pic_count: {type: Number, default: 0},
         content: {type: String ,default: ''},
         time_creation: {type: Date, default:Date.now},
-        time_vip_start:{type: Date, default:Date.now},                  // 一旦成为付费的帖子，记录付费开始的时间，只有在level_order不为0时才有效
-        time_vip_end:{type: Date, default:Date.now},                    // 付费置顶的结束日期，过了这个日期，level_order不起作用了
         //time_last_edit: {type: Date, default: Date.now},
         time_last_read: {type: Date, default: Date.now},
         level_order: {type:Number, default: 0},                         // 影响排序的属性，初始都为0，其值为在帖子上花的钱数。

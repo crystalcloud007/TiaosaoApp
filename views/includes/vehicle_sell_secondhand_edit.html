@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="v_sell_sh_price_e">价格：</label>
     <div class="col-md-4">
-        <input id="v_sell_sh_price_e" type="number" name="v_sell_sh_price_e" ng-model="entry_upload.desc.price"
+        <input id="v_sell_sh_price_e" type="text" name="v_sell_sh_price_e" ng-model="entry_upload.desc.price"
                ng-pattern="/(^[1-9][0-9]{0,3}\.[1-9]$)|(^0\.[1-9]$)|(^[1-9][0-9]{0,3}$)/"
                ng-required="true" class="form-control input-md" placeholder="如100" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.v_sell_sh_price_e.$valid"></span>
@@ -28,7 +28,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="v_sell_sh_range_e">行驶里程：</label>
     <div class="col-md-4">
-        <input id="v_sell_sh_range_e" type="number" name="v_sell_sh_range_e" ng-model="entry_upload.desc.range"
+        <input id="v_sell_sh_range_e" type="text" name="v_sell_sh_range_e" ng-model="entry_upload.desc.range"
                ng-pattern="/(^[1-9][0-9]{0,1}$)|(^[1-9][0-9]{0,1}\.[1-9]$)|(^0\.[1-9]$)/"
                ng-required="true" class="form-control input-md" placeholder="如100" maxlength="4">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.v_sell_sh_range_e.$valid"></span>
@@ -40,7 +40,7 @@
         <h4 class="text-left">万公里</h4>
     </div>
 </div>
-<!--div class="form-group has-feedback">
+<div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="v_sell_sh_time_e">首次上牌时间：</label>
     <div class="col-md-6">
         <input id="v_sell_sh_time_e" type="text" name="v_sell_sh_time_e" ng-model="entry_upload.desc.time_license"
@@ -51,4 +51,4 @@
             请按照yyyy-mm-dd格式输入有效的时间，如2010-06-01。
         </p>
     </div>
-</div-->
+</div>

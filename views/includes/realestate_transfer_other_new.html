@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_transfer_other_price_rent">租金：</label>
     <div class="col-md-4">
-        <input id="re_transfer_other_price_rent" type="number" name="re_transfer_other_price_rent" ng-model="entry.desc.price_rent"
+        <input id="re_transfer_other_price_rent" type="text" name="re_transfer_other_price_rent" ng-model="entry.desc.price_rent"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_transfer_other_price_rent.$valid"></span>
@@ -22,7 +22,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_transfer_other_price_transfer">转让费：</label>
     <div class="col-md-4">
-        <input id="re_transfer_other_price_transfer" type="number" name="re_transfer_other_price_transfer" ng-model="entry.desc.price_transfer"
+        <input id="re_transfer_other_price_transfer" type="text" name="re_transfer_other_price_transfer" ng-model="entry.desc.price_transfer"
                ng-pattern="/^[1-9][0-9]{0,2}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="3">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_transfer_other_price_transfer.$valid"></span>
@@ -49,7 +49,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_transfer_other_size">面积：</label>
     <div class="col-md-4">
-        <input id="re_transfer_other_size" type="number" name="re_transfer_other_size" ng-model="entry.desc.size"
+        <input id="re_transfer_other_size" type="text" name="re_transfer_other_size" ng-model="entry.desc.size"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如120" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_transfer_other_size.$valid"></span>

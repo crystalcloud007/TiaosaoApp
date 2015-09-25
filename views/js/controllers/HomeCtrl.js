@@ -2,14 +2,13 @@
  * Created by Haoran on 2015/8/21.
  */
 angular.module('HomeCtrl',[])
-    .controller('HomeController', ['$rootScope', '$scope', '$location', '$http', 'LocationChecker', 'Auth',
-        function($rootScope, $scope, $location, $http, LocationChecker, Auth)
+    .controller('HomeController', ['$rootScope', '$scope', '$location', 'LocationChecker', 'Auth',
+        function($rootScope, $scope, $location, LocationChecker, Auth)
     {
         var vm = this;
         $rootScope.loggedIn = Auth.isLoggedIn();
         vm.loggedIn = $rootScope.loggedIn;
-        vm.current_city = '';
-        vm.current_city_name = '';
+        vm.c_local = '';
         $rootScope.$on("$routeChangeStart", function()
         {
             //getLocation();
@@ -32,38 +31,17 @@ angular.module('HomeCtrl',[])
             vm.loggedIn = $rootScope.loggedIn;
         });
 
-        vm.goHome = function()
-        {
-            $location.path('/' + vm.current_city);
-        };
 
         vm.logOut = function()
         {
             getLocation();
             Auth.logout();
             vm.loggedIn = Auth.isLoggedIn();
-            $location.path('/' + vm.current_city);
+            $location.path('/' + vm.c_local);
         };
         var getLocation = function()
         {
-            vm.current_city = LocationChecker.getLocation();
-            //vm.current_city_name = LocationChecker.getCityName();
-            $http.get('/api/gen/get_geo_info/' + vm.current_city)
-                .success(function(data)
-                {
-                    if(data.status=='success')
-                    {
-                        vm.current_city_name = data.city_name;
-                    }
-                    else
-                    {
-                        $location.path('/err/not_found');
-                    }
-                })
-                .error(function()
-                {
-                    $location.path('/err/not_found');
-                });
+            vm.c_local = LocationChecker.getLocation();
             //console.log('HOME里面的现在地点：' + vm.c_local);
         };
     }])
@@ -126,8 +104,7 @@ angular.module('HomeCtrl',[])
 
         getCategoryInfo();
     }])
-    .controller('SignUpController', ['$http','$window','$location','Config', 'TextCheck','$routeParams' ,
-        function($http, $window, $location, Config, TextCheck,$routeParams)
+    .controller('SignUpController', ['$http','$window','$location','Config', 'TextCheck', function($http, $window, $location, Config, TextCheck)
     {
         var vm = this;
 
@@ -136,7 +113,6 @@ angular.module('HomeCtrl',[])
         vm.signup_type = 'email';
         vm.signup_err = false;
         vm.signup_err_msg = Config.help_words.server_err;
-        vm.current_city = $routeParams.city;
 
         vm.closeErrBanner = function()
         {
@@ -379,7 +355,7 @@ angular.module('HomeCtrl',[])
                         {
                             vm.signup_err = false;
                             $window.localStorage.setItem('token', data.token);
-                            $location.path('/' + vm.current_city);
+                            $location.path('/');
                         }
                         else
                         {
@@ -404,8 +380,7 @@ angular.module('HomeCtrl',[])
         };
         resetInfo();
     }])
-    .controller('LoginController', ['$http','$window','$location','Config', '$routeParams',
-        function($http, $window, $location, Config, $routeParams)
+    .controller('LoginController', ['$http','$window','$location','Config', function($http, $window, $location, Config)
     {
         var vm = this;
         vm.err = false;
@@ -419,8 +394,6 @@ angular.module('HomeCtrl',[])
         vm.msg_u = Config.help_words.login_blank_u;
         vm.msg_p = Config.help_words.login_blank_p;
         vm.msg_post = '';
-
-        vm.current_city = $routeParams.city;
 
         vm.closeErrBanner = function()
         {
@@ -504,7 +477,7 @@ angular.module('HomeCtrl',[])
                             {
                                 vm.err = false;
                                 $window.localStorage.setItem('token', data.token);
-                                $location.path('/' + vm.current_city);
+                                $location.path('/');
                                 break;
                             }
                             case 'invalid_password':
@@ -1452,23 +1425,6 @@ angular.module('HomeCtrl',[])
 
         // 执行抓取信息
         start();
-    }])
-    .controller('LocationListController',['$http',
-        function($http)
-    {
-        var vm = this;
-        vm.locations = {};
-        vm.getLocations = function()
-        {
-            $http.get('/api/gen/locations_from_prov')
-                .success(function(data)
-                {
-                    console.log(data);
-                    vm.locations = data.locations;
-                });
-        };
-
-        vm.getLocations();
     }])
     .controller('HelpController', ['$http', '$scope', '$routeParams', '$compile', '$location', function($http, $scope, $routeParams, $compile, $location)
     {

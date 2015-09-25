@@ -9,7 +9,6 @@ var UserSchema = new Schema(
     {
         username: {type:String, required:true, index:{unique: true}},
         password: {type:String, required:true, select: false},
-        admin:{type:Boolean,select:false,default:false},            // 是否管理员，该值除了管理员登录外，予以隐藏
         realname: {type:String, default:''},
         gender:{type:String,default:'男'},
         pic_url: {type:String, default:''},

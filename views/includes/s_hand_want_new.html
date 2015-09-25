@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="sh_want_price_from">价格范围：</label>
     <div class="col-md-3">
-        <input id="sh_want_price_from" type="number" name="sh_want_price_from" ng-model="entry.desc.price_from"
+        <input id="sh_want_price_from" type="text" name="sh_want_price_from" ng-model="entry.desc.price_from"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如500" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.sh_want_price_from.$valid"></span>
@@ -17,7 +17,7 @@
         <h4>—</h4>
     </div>
     <div class="col-md-3">
-        <input id="sh_want_price_to" type="number" name="sh_want_price_to" ng-model="entry.desc.price_to"
+        <input id="sh_want_price_to" type="text" name="sh_want_price_to" ng-model="entry.desc.price_to"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如500" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.sh_want_price_to.$valid"></span>

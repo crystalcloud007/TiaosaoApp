@@ -1,9 +1,13 @@
 <div class="container">
-    <div ng-include="'includes/ad_banner.html'"></div>
-</div>
-<div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
+            <p class="text-center">此处还可以放一些广告或者其他功能</p>
+        </div>
+    </div>
+    <div ng-include="'includes/search.html'"></div>
+    <div class="row">
+        <div class="col-md-2">广告</div>
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
@@ -43,26 +47,6 @@
                     <hr/>
                     <div ng-include="category"></div>
                     <hr/>
-                    <div class="row" ng-if="entry.pic_count>0">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <a href="javascript:void(0)" class="text-center">
-                                <img ng-src="{{current_img}}" class="img-responsive" alt="{{entry.title}}"/>
-                            </a>
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <hr ng-if="entry.pic_count>0"/>
-                    <div class="row" ng-if="entry.pic_count>0">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-2" ng-repeat="i_link in entry.pic_links">
-                            <a href="javascript:void(0)"  ng-click="switchPic(i_link)">
-                                <img ng-src="{{i_link}}"  alt="{{entry.title}}" width="100" height="70"/>
-                            </a>
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <hr ng-if="entry.pic_count>0"/>
                     <div class="row">
                         <div class="col-md-1">
                             <h4 class="text-left"><span class="glyphicon glyphicon-th-list"></span></h4>
@@ -73,16 +57,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-10">
+                        <div class="col-md-11">
                             <div tsshowhtml content="entry.content"></div>
                         </div>
-                        <div class="col-md-1"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div ng-include="'includes/ad_sidebar.html'"></div>
-        </div>
+        <div class="col-md-2">广告</div>
     </div>
 </div>

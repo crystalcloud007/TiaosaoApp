@@ -1,9 +1,10 @@
 <div class="container">
-    <div ng-include="'includes/ad_banner.html'"></div>
-</div>
-<div class="container">
+    <div class="col-md-12">
+        <p class="text-center">此处是广告的位置</p>
+    </div>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-2">留白处，会有广告</div>
+        <div class="col-md-8">
             <div ng-include="getIncludeUrl()"></div>
             <nav>
                 <ul class="pagination">
@@ -21,8 +22,6 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-md-2">
-            <div ng-include="'includes/ad_sidebar.html'"></div>
-        </div>
+        <div class="col-md-2">留白处，会有广告</div>
     </div>
 </div>

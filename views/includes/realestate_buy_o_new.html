@@ -1,14 +1,13 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_buy_o_price_from">价格范围：</label>
     <div class="col-md-3">
-        <input id="re_buy_o_price_from" type="number" name="re_buy_o_price_from" ng-model="entry.desc.price_from"
+        <input id="re_buy_o_price_from" type="text" name="re_buy_o_price_from" ng-model="entry.desc.price_from"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_o_price_from.$valid"></span>
         <div class="help-block"
              ng-if="(entryForm.re_buy_o_price_from.$invalid&&entryForm.re_buy_o_price_from.$dirty)||
-         (entryForm.re_buy_o_price_to.$invalid&&entryForm.re_buy_o_price_to.$dirty)||
-         (entry.desc.price_from>entry.desc.price_to)">
+         (entryForm.re_buy_o_price_to.$invalid&&entryForm.re_buy_o_price_to.$dirty)">
             <p class="label label-warning">
                 请填写有效金额，2-6位数字。后面的数字要大于前面的数字。
             </p>
@@ -18,7 +17,7 @@
         <h4>——</h4>
     </div>
     <div class="col-md-3">
-        <input id="re_buy_o_price_to" type="number" name="re_buy_o_price_to" ng-model="entry.desc.price_to"
+        <input id="re_buy_o_price_to" type="text" name="re_buy_o_price_to" ng-model="entry.desc.price_to"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_o_price_to.$valid"></span>
@@ -30,14 +29,13 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_buy_o_size_from">面积范围：</label>
     <div class="col-md-3">
-        <input id="re_buy_o_size_from" type="number" name="re_buy_o_size_from" ng-model="entry.desc.size_from"
+        <input id="re_buy_o_size_from" type="text" name="re_buy_o_size_from" ng-model="entry.desc.size_from"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如10000" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_o_size_from.$valid"></span>
         <div class="help-block"
              ng-if="(entryForm.re_buy_o_size_from.$invalid&&entryForm.re_buy_o_size_from.$dirty)||
-         (entryForm.re_buy_o_size_to.$invalid&&entryForm.re_buy_o_size_to.$dirty)||
-         (entry.desc.size_from>entry.desc.size_to)">
+         (entryForm.re_buy_o_size_to.$invalid&&entryForm.re_buy_o_size_to.$dirty)">
             <p class="label label-warning">
                 请填写有效面积，2-6位数字。后面的数字要大于前面的数字。
             </p>
@@ -47,7 +45,7 @@
         <h4>——</h4>
     </div>
     <div class="col-md-3">
-        <input id="re_buy_o_size_to" type="number" name="re_buy_o_size_to" ng-model="entry.desc.size_to"
+        <input id="re_buy_o_size_to" type="text" name="re_buy_o_size_to" ng-model="entry.desc.size_to"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如120" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_buy_o_size_to.$valid"></span>

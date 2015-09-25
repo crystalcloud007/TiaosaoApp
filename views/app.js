@@ -1,7 +1,7 @@
 /**
  * Created by Haoran on 2015/8/20.
  */
-var app = angular.module('app',['appRoute', 'ConfigService', 'AuthService','UserCtrl','HomeCtrl', 'EntryCtrl','ADCtrl']);
+var app = angular.module('app',['appRoute', 'ConfigService', 'AuthService','UserCtrl','HomeCtrl', 'EntryCtrl']);
 
 app.directive('ckeditor', function()
 {

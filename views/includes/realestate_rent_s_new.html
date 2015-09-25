@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_rent_s_price">租金：</label>
     <div class="col-md-4">
-        <input id="re_rent_s_price" type="number" name="re_rent_s_price" ng-model="entry.desc.price"
+        <input id="re_rent_s_price" type="text" name="re_rent_s_price" ng-model="entry.desc.price"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_rent_s_price.$valid"></span>
@@ -47,7 +47,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_rent_s_size">面积：</label>
     <div class="col-md-4">
-        <input id="re_rent_s_size" type="number" name="re_rent_s_size" ng-model="entry.desc.size"
+        <input id="re_rent_s_size" type="text" name="re_rent_s_size" ng-model="entry.desc.size"
                ng-pattern="/^[1-9][0-9]{1,3}$/"
                ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_rent_s_size.$valid"></span>

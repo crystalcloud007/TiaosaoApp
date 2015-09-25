@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_want_s_price_from_e">租金：</label>
     <div class="col-md-3">
-        <input id="re_want_s_price_from_e" type="number" name="re_want_s_price_from_e" ng-model="entry_upload.desc.price_from"
+        <input id="re_want_s_price_from_e" type="text" name="re_want_s_price_from_e" ng-model="entry_upload.desc.price_from"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_s_price_from_e.$valid"></span>
@@ -17,7 +17,7 @@
         <h4>——</h4>
     </div>
     <div class="col-md-3">
-        <input id="re_want_s_price_to_e" type="number" name="re_want_s_price_to_e" ng-model="entry_upload.desc.price_to"
+        <input id="re_want_s_price_to_e" type="text" name="re_want_s_price_to_e" ng-model="entry_upload.desc.price_to"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_s_price_to_e.$valid"></span>
@@ -35,9 +35,9 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_want_s_size_from_e">面积范围：</label>
     <div class="col-md-3">
-        <input id="re_want_s_size_from_e" type="number" name="re_want_s_size_from_e" ng-model="entry_upload.desc.size_from"
+        <input id="re_want_s_size_from_e" type="text" name="re_want_s_size_from_e" ng-model="entry_upload.desc.size_from"
                ng-pattern="/^[1-9][0-9]{1,3}$/"
-               ng-required="true" class="form-control input-md" placeholder="如100" maxlength="4">
+               ng-required="true" class="form-control input-md" placeholder="如1000" maxlength="4">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_s_size_from_e.$valid"></span>
         <div class="help-block"
              ng-if="(entryEditForm.re_want_s_size_from_e.$invalid&&entryEditForm.re_want_s_size_from_e.$dirty)||
@@ -51,9 +51,9 @@
         <h4>——</h4>
     </div>
     <div class="col-md-3">
-        <input id="re_want_s_size_to_e" type="number" name="re_want_s_size_to_e" ng-model="entry_upload.desc.size_to"
+        <input id="re_want_s_size_to_e" type="text" name="re_want_s_size_to_e" ng-model="entry_upload.desc.size_to"
                ng-pattern="/^[1-9][0-9]{1,3}$/"
-               ng-required="true" class="form-control input-md" placeholder="如100" maxlength="4">
+               ng-required="true" class="form-control input-md" placeholder="如120" maxlength="4">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_s_size_to_e.$valid"></span>
     </div>
     <div class="col-md-2">

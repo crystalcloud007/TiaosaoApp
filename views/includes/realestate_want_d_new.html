@@ -31,7 +31,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_want_d_period_shortest">最短租期：</label>
     <div class="col-md-2">
-        <input id="re_want_d_period_shortest" type="number" name="re_want_d_period_shortest" ng-model="entry.desc.period_shortest"
+        <input id="re_want_d_period_shortest" type="text" name="re_want_d_period_shortest" ng-model="entry.desc.period_shortest"
                ng-pattern="/^[1-9][0-9]{0,1}$/"
                ng-required="true" class="form-control input-md" placeholder="如10" maxlength="2">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_want_d_period_shortest.$valid"></span>
