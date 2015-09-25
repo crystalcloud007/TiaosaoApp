@@ -52,8 +52,9 @@ module.exports =
                 chn:'房产',
                 subs:
                 {
-                    'realestate_rent_r_whole':{eng:'realestate_rent_r_whole', chn:'整租房'},
-                    'realestate_rent_r_room':{eng:'realestate_rent_r_room', chn:'合租房'},
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    //'realestate_rent_r_whole':{eng:'realestate_rent_r_whole', chn:'整租房'},
+                    //'realestate_rent_r_room':{eng:'realestate_rent_r_room', chn:'合租房'},
                     //'realestate_rent_r_bed':{eng:'realestate_rent_r_bed', chn:'出租床位'},
                     'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
                     'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
@@ -69,11 +70,11 @@ module.exports =
                     'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
                     'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
                     'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
-                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租其他'},
-                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租其他'},
-                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转租其他'},
-                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购其他'},
-                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售其他'}
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
                 }
             },
             'vehicle':
@@ -118,31 +119,433 @@ module.exports =
                     'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
                     //'service_other':{eng:'service_other',chn:'其他服务'}
                 }
-            }
-            /*'hr':
+            },
+            'hr':
             {
                 eng:'hr',
                 chn:'招聘求职',
                 subs:
                 {
-                    'hr_job_full': {eng:'hr_job_full', chn:'全职招聘'},
-                    'hr_job_part': {eng:'hr_job_part', chn:'兼职招聘'},
-                    'hr_job_fair': {eng:'hr_job_fair', chn:'招聘会'}
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
                 }
-            }*/
+            }
         },
         'sh':
         {
-            'nothing':
+            'secondhand':
             {
-                eng:'nothing',
-                chn:'测试用的',
+                eng:'secondhand',
+                chn:'二手市场',
                 subs:
                 {
-                    'test':{eng:'test',chn:'测试啊测试'}
+                    's_hand_mobile':{eng:'s_hand_mobile', chn:'二手手机'},
+                    's_hand_digital':{eng:'s_hand_digital',chn:'数码产品'},
+                    's_hand_home_supply':{eng:'s_hand_home_supply',chn:'家电、家具、家居及母婴用品'},
+                    's_hand_clothing':{eng:'s_hand_clothing',chn:'服装、穿戴、箱包、配饰'},
+                    's_hand_instrument':{eng:'s_hand_instrument',chn:'书籍、文教、运动、乐器'},
+                    's_hand_other':{eng:'s_hand_other',chn:'其他类型物品'},
+                    's_hand_want':{eng:'s_hand_want', chn:'求购'}
+                }
+            },
+            'real_estate':
+            {
+                eng:'real_estate',
+                chn:'房产',
+                subs:
+                {
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
+                    'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
+                    'realestate_want_d':{eng:'realestate_want_d', chn:'求租日租房'},
+                    'realestate_buy_r':{eng:'realestate_buy_r', chn:'求购二手房'},
+                    'realestate_sell_r':{eng:'realestate_sell_r',chn:'出售二手房'},
+                    'realestate_rent_o':{eng:'realestate_rent_o', chn:'出租写字楼'},
+                    'realestate_want_o':{eng:'realestate_want_o', chn:'求租写字楼'},
+                    'realestate_sell_o':{eng:'realestate_sell_o', chn:'出售写字楼'},
+                    'realestate_buy_o':{eng:'realestate_buy_o',chn:'求购写字楼'},
+                    'realestate_rent_s':{eng:'realestate_rent_s', chn:'出租商铺'},
+                    'realestate_sell_s':{eng:'realestate_sell_s', chn:'出售商铺'},
+                    'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
+                    'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
+                    'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
+                }
+            },
+            'vehicle':
+            {
+                eng:'vehicle',
+                chn:'车辆交易及服务',
+                subs:
+                {
+                    'vehicle_sell_secondhand': {eng:'vehicle_sell_secondhand', chn:'出售二手车'},
+                    'vehicle_buy_secondhand': {eng:'vehicle_buy_secondhand', chn:'求购二手车'},
+                    'vehicle_sell_motor': {eng:'vehicle_sell_motor', chn:'摩托车'},
+                    'vehicle_sell_bike': {eng:'vehicle_sell_bike', chn:'自行车、电动车'},
+                    'vehicle_component': {eng:'vehicle_component', chn:'汽车配件'},
+                    'vehicle_deco_mainte_modif': {eng:'vehicle_deco_mainte_modif', chn:'装饰、保养、改装'}
+                }
+            },
+            'service':
+            {
+                eng:'service',
+                chn:'本地服务',
+                subs:
+                {
+                    'service_home':{eng:'service_home',chn:'家政服务'},
+                    'service_construct':{eng:'service_construct',chn:'装修建材'},
+                    'service_tutor':{eng:'service_tutor',chn:'教育培训'},
+                    'service_business':{eng:'service_business',chn:'商务法务'},
+                    'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
+                }
+            },
+            'hr':
+            {
+                eng:'hr',
+                chn:'招聘求职',
+                subs:
+                {
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
                 }
             }
-        }
+        },
+        'cq':
+        {
+            'secondhand':
+            {
+                eng:'secondhand',
+                chn:'二手市场',
+                subs:
+                {
+                    's_hand_mobile':{eng:'s_hand_mobile', chn:'二手手机'},
+                    's_hand_digital':{eng:'s_hand_digital',chn:'数码产品'},
+                    's_hand_home_supply':{eng:'s_hand_home_supply',chn:'家电、家具、家居及母婴用品'},
+                    's_hand_clothing':{eng:'s_hand_clothing',chn:'服装、穿戴、箱包、配饰'},
+                    's_hand_instrument':{eng:'s_hand_instrument',chn:'书籍、文教、运动、乐器'},
+                    's_hand_other':{eng:'s_hand_other',chn:'其他类型物品'},
+                    's_hand_want':{eng:'s_hand_want', chn:'求购'}
+                }
+            },
+            'real_estate':
+            {
+                eng:'real_estate',
+                chn:'房产',
+                subs:
+                {
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
+                    'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
+                    'realestate_want_d':{eng:'realestate_want_d', chn:'求租日租房'},
+                    'realestate_buy_r':{eng:'realestate_buy_r', chn:'求购二手房'},
+                    'realestate_sell_r':{eng:'realestate_sell_r',chn:'出售二手房'},
+                    'realestate_rent_o':{eng:'realestate_rent_o', chn:'出租写字楼'},
+                    'realestate_want_o':{eng:'realestate_want_o', chn:'求租写字楼'},
+                    'realestate_sell_o':{eng:'realestate_sell_o', chn:'出售写字楼'},
+                    'realestate_buy_o':{eng:'realestate_buy_o',chn:'求购写字楼'},
+                    'realestate_rent_s':{eng:'realestate_rent_s', chn:'出租商铺'},
+                    'realestate_sell_s':{eng:'realestate_sell_s', chn:'出售商铺'},
+                    'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
+                    'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
+                    'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
+                }
+            },
+            'vehicle':
+            {
+                eng:'vehicle',
+                chn:'车辆交易及服务',
+                subs:
+                {
+                    'vehicle_sell_secondhand': {eng:'vehicle_sell_secondhand', chn:'出售二手车'},
+                    'vehicle_buy_secondhand': {eng:'vehicle_buy_secondhand', chn:'求购二手车'},
+                    'vehicle_sell_motor': {eng:'vehicle_sell_motor', chn:'摩托车'},
+                    'vehicle_sell_bike': {eng:'vehicle_sell_bike', chn:'自行车、电动车'},
+                    'vehicle_component': {eng:'vehicle_component', chn:'汽车配件'},
+                    'vehicle_deco_mainte_modif': {eng:'vehicle_deco_mainte_modif', chn:'装饰、保养、改装'}
+                }
+            },
+            'service':
+            {
+                eng:'service',
+                chn:'本地服务',
+                subs:
+                {
+                    'service_home':{eng:'service_home',chn:'家政服务'},
+                    'service_construct':{eng:'service_construct',chn:'装修建材'},
+                    'service_tutor':{eng:'service_tutor',chn:'教育培训'},
+                    'service_business':{eng:'service_business',chn:'商务法务'},
+                    'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
+                }
+            },
+            'hr':
+            {
+                eng:'hr',
+                chn:'招聘求职',
+                subs:
+                {
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
+                }
+            }
+        },
+        'tj':
+        {
+            'secondhand':
+            {
+                eng:'secondhand',
+                chn:'二手市场',
+                subs:
+                {
+                    's_hand_mobile':{eng:'s_hand_mobile', chn:'二手手机'},
+                    's_hand_digital':{eng:'s_hand_digital',chn:'数码产品'},
+                    's_hand_home_supply':{eng:'s_hand_home_supply',chn:'家电、家具、家居及母婴用品'},
+                    's_hand_clothing':{eng:'s_hand_clothing',chn:'服装、穿戴、箱包、配饰'},
+                    's_hand_instrument':{eng:'s_hand_instrument',chn:'书籍、文教、运动、乐器'},
+                    's_hand_other':{eng:'s_hand_other',chn:'其他类型物品'},
+                    's_hand_want':{eng:'s_hand_want', chn:'求购'}
+                }
+            },
+            'real_estate':
+            {
+                eng:'real_estate',
+                chn:'房产',
+                subs:
+                {
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
+                    'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
+                    'realestate_want_d':{eng:'realestate_want_d', chn:'求租日租房'},
+                    'realestate_buy_r':{eng:'realestate_buy_r', chn:'求购二手房'},
+                    'realestate_sell_r':{eng:'realestate_sell_r',chn:'出售二手房'},
+                    'realestate_rent_o':{eng:'realestate_rent_o', chn:'出租写字楼'},
+                    'realestate_want_o':{eng:'realestate_want_o', chn:'求租写字楼'},
+                    'realestate_sell_o':{eng:'realestate_sell_o', chn:'出售写字楼'},
+                    'realestate_buy_o':{eng:'realestate_buy_o',chn:'求购写字楼'},
+                    'realestate_rent_s':{eng:'realestate_rent_s', chn:'出租商铺'},
+                    'realestate_sell_s':{eng:'realestate_sell_s', chn:'出售商铺'},
+                    'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
+                    'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
+                    'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
+                }
+            },
+            'vehicle':
+            {
+                eng:'vehicle',
+                chn:'车辆交易及服务',
+                subs:
+                {
+                    'vehicle_sell_secondhand': {eng:'vehicle_sell_secondhand', chn:'出售二手车'},
+                    'vehicle_buy_secondhand': {eng:'vehicle_buy_secondhand', chn:'求购二手车'},
+                    'vehicle_sell_motor': {eng:'vehicle_sell_motor', chn:'摩托车'},
+                    'vehicle_sell_bike': {eng:'vehicle_sell_bike', chn:'自行车、电动车'},
+                    'vehicle_component': {eng:'vehicle_component', chn:'汽车配件'},
+                    'vehicle_deco_mainte_modif': {eng:'vehicle_deco_mainte_modif', chn:'装饰、保养、改装'}
+                }
+            },
+            'service':
+            {
+                eng:'service',
+                chn:'本地服务',
+                subs:
+                {
+                    'service_home':{eng:'service_home',chn:'家政服务'},
+                    'service_construct':{eng:'service_construct',chn:'装修建材'},
+                    'service_tutor':{eng:'service_tutor',chn:'教育培训'},
+                    'service_business':{eng:'service_business',chn:'商务法务'},
+                    'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
+                }
+            },
+            'hr':
+            {
+                eng:'hr',
+                chn:'招聘求职',
+                subs:
+                {
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
+                }
+            }
+        },
+        'gz':
+        {
+            'secondhand':
+            {
+                eng:'secondhand',
+                chn:'二手市场',
+                subs:
+                {
+                    's_hand_mobile':{eng:'s_hand_mobile', chn:'二手手机'},
+                    's_hand_digital':{eng:'s_hand_digital',chn:'数码产品'},
+                    's_hand_home_supply':{eng:'s_hand_home_supply',chn:'家电、家具、家居及母婴用品'},
+                    's_hand_clothing':{eng:'s_hand_clothing',chn:'服装、穿戴、箱包、配饰'},
+                    's_hand_instrument':{eng:'s_hand_instrument',chn:'书籍、文教、运动、乐器'},
+                    's_hand_other':{eng:'s_hand_other',chn:'其他类型物品'},
+                    's_hand_want':{eng:'s_hand_want', chn:'求购'}
+                }
+            },
+            'real_estate':
+            {
+                eng:'real_estate',
+                chn:'房产',
+                subs:
+                {
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
+                    'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
+                    'realestate_want_d':{eng:'realestate_want_d', chn:'求租日租房'},
+                    'realestate_buy_r':{eng:'realestate_buy_r', chn:'求购二手房'},
+                    'realestate_sell_r':{eng:'realestate_sell_r',chn:'出售二手房'},
+                    'realestate_rent_o':{eng:'realestate_rent_o', chn:'出租写字楼'},
+                    'realestate_want_o':{eng:'realestate_want_o', chn:'求租写字楼'},
+                    'realestate_sell_o':{eng:'realestate_sell_o', chn:'出售写字楼'},
+                    'realestate_buy_o':{eng:'realestate_buy_o',chn:'求购写字楼'},
+                    'realestate_rent_s':{eng:'realestate_rent_s', chn:'出租商铺'},
+                    'realestate_sell_s':{eng:'realestate_sell_s', chn:'出售商铺'},
+                    'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
+                    'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
+                    'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
+                }
+            },
+            'vehicle':
+            {
+                eng:'vehicle',
+                chn:'车辆交易及服务',
+                subs:
+                {
+                    'vehicle_sell_secondhand': {eng:'vehicle_sell_secondhand', chn:'出售二手车'},
+                    'vehicle_buy_secondhand': {eng:'vehicle_buy_secondhand', chn:'求购二手车'},
+                    'vehicle_sell_motor': {eng:'vehicle_sell_motor', chn:'摩托车'},
+                    'vehicle_sell_bike': {eng:'vehicle_sell_bike', chn:'自行车、电动车'},
+                    'vehicle_component': {eng:'vehicle_component', chn:'汽车配件'},
+                    'vehicle_deco_mainte_modif': {eng:'vehicle_deco_mainte_modif', chn:'装饰、保养、改装'}
+                }
+            },
+            'service':
+            {
+                eng:'service',
+                chn:'本地服务',
+                subs:
+                {
+                    'service_home':{eng:'service_home',chn:'家政服务'},
+                    'service_construct':{eng:'service_construct',chn:'装修建材'},
+                    'service_tutor':{eng:'service_tutor',chn:'教育培训'},
+                    'service_business':{eng:'service_business',chn:'商务法务'},
+                    'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
+                }
+            },
+            'hr':
+            {
+                eng:'hr',
+                chn:'招聘求职',
+                subs:
+                {
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
+                }
+            }
+        },
+        'sz':
+        {
+            'secondhand':
+            {
+                eng:'secondhand',
+                chn:'二手市场',
+                subs:
+                {
+                    's_hand_mobile':{eng:'s_hand_mobile', chn:'二手手机'},
+                    's_hand_digital':{eng:'s_hand_digital',chn:'数码产品'},
+                    's_hand_home_supply':{eng:'s_hand_home_supply',chn:'家电、家具、家居及母婴用品'},
+                    's_hand_clothing':{eng:'s_hand_clothing',chn:'服装、穿戴、箱包、配饰'},
+                    's_hand_instrument':{eng:'s_hand_instrument',chn:'书籍、文教、运动、乐器'},
+                    's_hand_other':{eng:'s_hand_other',chn:'其他类型物品'},
+                    's_hand_want':{eng:'s_hand_want', chn:'求购'}
+                }
+            },
+            'real_estate':
+            {
+                eng:'real_estate',
+                chn:'房产',
+                subs:
+                {
+                    'realestate_rent_r':{eng:'realestate_rent_r',chn:'出租住房'},
+                    'realestate_want_r':{eng:'realestate_want_r', chn:'求租住房'},
+                    'realestate_rent_d':{eng:'realestate_rent_d', chn:'出租日租房'},
+                    'realestate_want_d':{eng:'realestate_want_d', chn:'求租日租房'},
+                    'realestate_buy_r':{eng:'realestate_buy_r', chn:'求购二手房'},
+                    'realestate_sell_r':{eng:'realestate_sell_r',chn:'出售二手房'},
+                    'realestate_rent_o':{eng:'realestate_rent_o', chn:'出租写字楼'},
+                    'realestate_want_o':{eng:'realestate_want_o', chn:'求租写字楼'},
+                    'realestate_sell_o':{eng:'realestate_sell_o', chn:'出售写字楼'},
+                    'realestate_buy_o':{eng:'realestate_buy_o',chn:'求购写字楼'},
+                    'realestate_rent_s':{eng:'realestate_rent_s', chn:'出租商铺'},
+                    'realestate_sell_s':{eng:'realestate_sell_s', chn:'出售商铺'},
+                    'realestate_want_s':{eng:'realestate_want_s',chn:'求租商铺'},
+                    'realestate_buy_s':{eng:'realestate_buy_s', chn:'求购商铺'},
+                    'realestate_transfer_s':{eng:'realestate_transfer_s', chn:'转让商铺'},
+                    'realestate_rent_other':{eng:'realestate_rent_other', chn:'出租厂房、仓库、其他'},
+                    'realestate_want_other':{eng:'realestate_want_other', chn:'求租厂房、仓库、其他'},
+                    'realestate_transfer_other':{eng:'realestate_transfer_other', chn:'转让厂房、仓库、其他'},
+                    'realestate_buy_other':{eng:'realestate_buy_other', chn:'求购厂房、仓库、其他'},
+                    'realestate_sell_other':{eng:'realestate_sell_other', chn:'出售厂房、仓库、其他'}
+                }
+            },
+            'vehicle':
+            {
+                eng:'vehicle',
+                chn:'车辆交易及服务',
+                subs:
+                {
+                    'vehicle_sell_secondhand': {eng:'vehicle_sell_secondhand', chn:'出售二手车'},
+                    'vehicle_buy_secondhand': {eng:'vehicle_buy_secondhand', chn:'求购二手车'},
+                    'vehicle_sell_motor': {eng:'vehicle_sell_motor', chn:'摩托车'},
+                    'vehicle_sell_bike': {eng:'vehicle_sell_bike', chn:'自行车、电动车'},
+                    'vehicle_component': {eng:'vehicle_component', chn:'汽车配件'},
+                    'vehicle_deco_mainte_modif': {eng:'vehicle_deco_mainte_modif', chn:'装饰、保养、改装'}
+                }
+            },
+            'service':
+            {
+                eng:'service',
+                chn:'本地服务',
+                subs:
+                {
+                    'service_home':{eng:'service_home',chn:'家政服务'},
+                    'service_construct':{eng:'service_construct',chn:'装修建材'},
+                    'service_tutor':{eng:'service_tutor',chn:'教育培训'},
+                    'service_business':{eng:'service_business',chn:'商务法务'},
+                    'service_leisure':{eng:'service_leisure',chn:'休闲娱乐'}
+                }
+            },
+            'hr':
+            {
+                eng:'hr',
+                chn:'招聘求职',
+                subs:
+                {
+                    'hr_offer': {eng:'hr_offer', chn:'招聘'},
+                    'hr_want': {eng:'hr_want', chn:'求职'}
+                }
+            }
+        },
     },
 
     // 发帖时的描述语句
