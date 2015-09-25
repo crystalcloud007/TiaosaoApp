@@ -1,5 +1,30 @@
 <div class="panel panel-default">
     <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8 center-block">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="搜索想要的信息，关键词以空格隔开。最多30个字符。"
+                           ng-model="List.s_search" maxlength="30"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"
+                                    ng-click="addQuery_searchBar(['title'])">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr  ng-if="count_query_display>0"/>
+        <div class="row" ng-if="count_query_display>0">
+            <ul>当前筛选条件：
+                <li ng-repeat="cond in query_display">{{cond}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
         <div ng-repeat="entry in entries">
             <div class="row">
                 <div class="col-md-8">

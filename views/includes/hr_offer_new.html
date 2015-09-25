@@ -1,0 +1,39 @@
+<div class="form-group has-feedback">
+    <label class="control-label col-md-2 text-left" for="hr_offer_name">职位名称：</label>
+    <div class="col-md-6">
+        <input id="hr_offer_name" type="text" name="hr_offer_name" ng-model="entry.desc.name"
+               ng-pattern="/^[\s\S]{2,15}$/"
+               ng-required="true" class="form-control input-md" placeholder="招聘职位名称，15个字符以内" maxlength="15">
+        <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.hr_offer_name.$valid"></span>
+        <p ng-if="entryForm.hr_offer_name.$invalid&&entryForm.hr_offer_name.$dirty" class="help-block label label-warning">
+            输入职务名称，2-15个字符。
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="hr_offer_type">招聘类型：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.type" ng-required="true" id="hr_offer_type">
+            <option value="全职">全职</option>
+            <option value="兼职">兼职</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2 text-left" for="hr_offer_salary">每月薪金：</label>
+    <div class="col-md-10">
+        <select ng-model="entry.desc.salary" ng-required="true" id="hr_offer_salary">
+            <option value="面议">面议</option>
+            <option value="1000元以下">1000元以下</option>
+            <option value="1000-2000元">1000-2000元</option>
+            <option value="2000-3000元">2000-3000元</option>
+            <option value="3000-5000元">3000-5000元</option>
+            <option value="5000-8000元">5000-8000元</option>
+            <option value="8000-12000元">8000-12000元</option>
+            <option value="12000-20000元">12000-20000元</option>
+            <option value="20000-25000元">20000-25000元</option>
+            <option value="25000元以上">25000元以上</option>
+        </select>
+    </div>
+</div>

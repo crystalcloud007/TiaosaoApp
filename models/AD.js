@@ -7,13 +7,16 @@ var Schema = mongoose.Schema;
 
 var ADSchema = new Schema(
     {
-        category:{type:String, required:true},              // 业务类型
+        title:{type:String,required:true},
+        category:{type:String, default:''},                 // 业务类型 -- 字符串组，用空格隔开，以便正则表达式查询。
         type_display:{type:String, required:true},          // 播放方式，横幅或是页边什么的
         type_region:{type:String ,required:true},           // 区域类型：全国，某省还是某市
         region_prov:{type:String, default:''},              // 省名称
         region_city:{type:String, default:''},              // 市名称
-        //region_dist:{type:String ,default:''},
+        priority:{type:Number,default:0},                   // 显示优先级，排序用，全国高于省，省高于市。
         pic_url:{type:String, default:''},
+        is_active:{type:Boolean, default:false},            // 是否生效，不生效的不予显示。
+        desc:{type:String,default:''},                      // 用于描述广告主的消息
         time_start:{type:Date, default:Date.now()},         // 播放开始日期
         time_end:{type:Date, default:Date.now()}            // 播放结束日期
     }

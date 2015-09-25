@@ -1,23 +1,22 @@
 <!--div class="container">
-    <div class="jumbotron">
-        <p>欢迎来到跳骚网，这里以后会出现轮替广告</p>
-    </div>
-</div-->
-<!--div class="container">
     <div ng-include="'includes/search.html'"></div>
     <hr/>
 </div-->
+<div class="container">
+    <div ng-include="'includes/ad_screen.html'"></div>
+</div>
 <div class="container">
     <div class="col-md-12 panel panel-default" ng-repeat="item_main in MainMenu.category">
         <h4><strong>{{item_main.chn}}</strong></h4>
         <ul class="list-group list-inline">
             <li ng-repeat="item_sub in item_main.subs" class="list-group-item">
-                <a href="/{{MainMenu.location}}/list/{{item_sub.eng}}/1" target="_blank">{{item_sub.chn}}</a>
+                <a href="/{{MainMenu.location}}/list/{{item_sub.eng}}" target="_blank">{{item_sub.chn}}</a>
                 <b> | </b>
             </li>
         </ul>
     </div>
 </div>
+
 <!--div class="container" ng-mouseleave="MainMenu.mouseLeaveMenuMain()">
     <div class="row">
         <div class="col-md-12 panel panel-default">
@@ -41,7 +40,7 @@
         </div>
     </div>
 </div-->
-<div class="container">
+<!--div class="container">
     <hr/>
     <div class="col-md-4">
         <h3>热门信息-房产</h3>
@@ -55,4 +54,4 @@
         <h3>热门信息-汽车相关</h3>
         <button class="btn btn-success">了解更多 &raquo;</button>
     </div>
-</div>
+</div-->

@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_sell_other_price">价格：</label>
     <div class="col-md-4">
-        <input id="re_sell_other_price" type="text" name="re_sell_other_price" ng-model="entry.desc.price"
+        <input id="re_sell_other_price" type="number" name="re_sell_other_price" ng-model="entry.desc.price"
                ng-pattern="/^[1-9][0-9]{0,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如100" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_sell_other_price.$valid"></span>
@@ -28,7 +28,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_sell_other_size">面积：</label>
     <div class="col-md-4">
-        <input id="re_sell_other_size" type="text" name="re_sell_other_size" ng-model="entry.desc.size"
+        <input id="re_sell_other_size" type="number" name="re_sell_other_size" ng-model="entry.desc.size"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如120" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.re_sell_other_size.$valid"></span>

@@ -5,6 +5,10 @@ angular.module('ConfigService',[])
     .factory('Config', function()
     {
         var config = {};
+
+        config.pic_size_max = 1024 * 1024 * 2;
+        config.pic_file_format = ['jpg','jpeg','png','gif'];
+
         config.help_words=
         {
             'server_err':'服务器出错啦，请稍后再试。T_T',
@@ -63,7 +67,12 @@ angular.module('ConfigService',[])
             'entry_upload_invalid':'信息输入有误，请重试！',
             'entry_upload_too_many':'已达到今日发帖上限，发帖失败。',
             'entry_edit_invalid_input':'输入格式有误，请改正后重试。',
-            'entry_edit_not_owner':'没有修改权限。'
+            'entry_edit_not_owner':'没有修改权限。',
+            'entry_pic_not_owner':'您没有对此帖子的修改权限。',
+            'entry_pic_too_many':'图片数量已达到上线。',
+            'entry_pic_upload_blank':'请选择正确的文件之后再上传。',
+            'entry_pic_format_invalid':'仅支持jpg、jpeg、gif和png格式的图片。',
+            'entry_pic_size_invalid':'图片大小不能超过2M。'
         };
         return config;
     })
@@ -184,28 +193,72 @@ angular.module('ConfigService',[])
         return check;
     }])
     // 负责检查和记录用户当前地理位置
-    .factory('LocationChecker',['$location', '$route','$rootScope', function($location, $route, $rootScope)
+    .factory('LocationChecker',['$location', '$route','$rootScope','$http', function($location, $route, $rootScope,$http)
     {
         var checker = {};
 
-        checker.current_location = 'xxx';
+        checker.current_location = 'bj';
+
         checker.getLocationFromServer = function()
         {
-            // 上云之后才能发挥作用，现在只用来测试基本功能
-            checker.current_location = 'bj';
-            $location.path('/' + checker.current_location);
+            console.log('getting city index....');
+            $http.get('/api/gen/ip_to_addr')
+                .success(function(data)
+                {
+                    //console.log(data);
+                    checker.current_location = data.index_city;
+
+                    $rootScope.current_geo_city = checker.current_location;
+                    console.log($rootScope.current_geo_city);
+                    $location.path('/' + checker.current_location);
+                })
+                .error(function()
+                {
+                    checker.current_location = 'bj';
+
+                    $rootScope.current_geo_city = checker.current_location;
+                    $location.path('/' + checker.current_location);
+                });
         };
         checker.getLocationFromRouteParams = function()
         {
-            checker.current_location = $route.current.params.city;
-            // 如果city是err，则重新检测地点 -- 只有在not_found中才会遇到
+            if($route.current.params.city == 'err')
+            {
+                console.log('encountering err');
+                $http.get('/api/gen/ip_to_addr')
+                    .success(function(data)
+                    {
+                        checker.current_location = data.index_city;
+                        $rootScope.current_geo_city = checker.current_location;
+                        $location.path('/' + checker.current_location + '/not_found');
+                    })
+                    .error(function()
+                    {
+                        checker.current_location = 'bj';
+                        $rootScope.current_geo_city = checker.current_location;
+                        $location.path('/' + checker.current_location + '/not_found');
+                    });
+            }
+            else
+            {
+                checker.current_location = $route.current.params.city;
+                $rootScope.current_geo_city = checker.current_location;
+            }
+            /*checker.current_location = $route.current.params.city;
+
+            // 如果city是err，则将err换成当前city -- 只有在not_found中才会遇到
             if(checker.current_location == 'err')
             {
                 // 上云之后才能发挥作用，现在只用来做测试
                 checker.current_location = 'bj';
+
+                $rootScope.current_geo_city = checker.current_location;
                 $location.path('/' + checker.current_location + '/not_found');
             }
-            $rootScope.current_geo_city = checker.current_location;
+            else
+            {
+                $rootScope.current_geo_city = checker.current_location;
+            }*/
             //console.log('RESOLVE时获取的地点是：' + $rootScope.current_geo_city);
         };
         checker.getLocation = function()

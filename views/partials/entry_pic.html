@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 class="text-center">修改帖子图片</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row" ng-if="pic_count<=0">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <h2 class="text-center">您尚未上传任何图片</h2>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="pic_count>0">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <a href="javascript:void(0)" class="text-center">
+                                <img ng-src="{{current_img}}" class="img-responsive" alt="{{current_img}}"/>
+                            </a>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <hr ng-if="pic_count>0"/>
+                    <div class="row" ng-if="pic_count>0">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2" ng-repeat="i_link in pic_links">
+                            <a href="javascript:void(0)"  ng-click="switchPic(i_link)">
+                                <img ng-src="{{i_link}}"  alt="{{i_link}}" width="100" height="70"/>
+                            </a>
+                            <a href="javascript:void(0)" ng-click="deletePic(i_link)" ng-if="!deleting">删除</a>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <hr/>
+                    <div class="row" ng-if="uploading">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <p><strong>图片上传中....</strong></p>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="pic_count>=5">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <h4><strong>图片数量达到上限。</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="pic_count<5&&!uploading">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <p><strong>您还能上传 {{5 - pic_count}} 张图片。</strong></p>
+                            <p>支持jpg、jpeg、gif、png格式图片，图片大小不能超过2M。</p>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="pic_count<5&&!uploading">
+                        <div class="col-md-1"><!--span class="glyphicon glyphicon-file"></span--></div>
+                        <div class="col-md-11">
+                            <form class="form form-horizontal" role="form" name="pic_form">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <input id="upload_pic_entry" type="file" class="input-file"
+                                                onchange="angular.element(this).scope().getUploadPic(this.files)"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary" ng-click="uploadPic()">上传</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-danger alert-dismissable" role="alert" ng-if="has_err">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeErrBanner()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{msg_err}}</strong>
+            </div>
+            <hr/>
+            <p><a href="/{{current_city}}/detail/{{entry_id}}">点击查看帖子</a></p>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

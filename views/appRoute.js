@@ -33,7 +33,7 @@ angular.module('appRoute', ['ngRoute'])
                     }
                 }
             })
-            .when('/:city/list/:category/:page',
+            .when('/:city/list/:category',
             {
                 templateUrl:'partials/entry_list.html',
                 controller:'EntryListController',
@@ -64,6 +64,19 @@ angular.module('appRoute', ['ngRoute'])
                 templateUrl:'partials/entry_detail.html',
                 controller:'EntryDetailController',
                 controllerAs:'Detail',
+                resolve:
+                {
+                    func: function(LocationChecker)
+                    {
+                        LocationChecker.getLocationFromRouteParams();
+                    }
+                }
+            })
+            .when('/:city/pic_entry/:id',
+            {
+                templateUrl:'partials/entry_pic.html',
+                controller:'EntryPicController',
+                controllerAs:'Pic',
                 resolve:
                 {
                     func: function(LocationChecker)
@@ -129,6 +142,19 @@ angular.module('appRoute', ['ngRoute'])
                 templateUrl:'partials/help.html',
                 controller:'HelpController',
                 controllerAs:'Help',
+                resolve:
+                {
+                    func: function(LocationChecker)
+                    {
+                        LocationChecker.getLocationFromRouteParams();
+                    }
+                }
+            })
+            .when('/:city/locations',
+            {
+                templateUrl:'partials/locations.html',
+                controller:'LocationListController',
+                controllerAs:'LocationList',
                 resolve:
                 {
                     func: function(LocationChecker)

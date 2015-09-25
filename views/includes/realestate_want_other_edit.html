@@ -1,7 +1,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_want_other_price_from_e">租金范围：</label>
     <div class="col-md-3">
-        <input id="re_want_other_price_from_e" type="text" name="re_want_other_price_from_e" ng-model="entry_upload.desc.price_from"
+        <input id="re_want_other_price_from_e" type="number" name="re_want_other_price_from_e" ng-model="entry_upload.desc.price_from"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_other_price_from_e.$valid"></span>
@@ -17,7 +17,7 @@
         <h4>——</h4>
     </div>
     <div class="col-md-3">
-        <input id="re_want_other_price_to_e" type="text" name="re_want_other_price_to_e" ng-model="entry_upload.desc.price_to"
+        <input id="re_want_other_price_to_e" type="number" name="re_want_other_price_to_e" ng-model="entry_upload.desc.price_to"
                ng-pattern="/^[1-9][0-9]{1,5}$/"
                ng-required="true" class="form-control input-md" placeholder="如5500" maxlength="6">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_other_price_to_e.$valid"></span>
@@ -47,7 +47,7 @@
 <div class="form-group has-feedback">
     <label class="control-label col-md-2 text-left" for="re_want_other_size_e">面积：</label>
     <div class="col-md-4">
-        <input id="re_want_other_size_e" type="text" name="re_want_other_size_e" ng-model="entry_upload.desc.size"
+        <input id="re_want_other_size_e" type="number" name="re_want_other_size_e" ng-model="entry_upload.desc.size"
                ng-pattern="/^[1-9][0-9]{1,4}$/"
                ng-required="true" class="form-control input-md" placeholder="如120" maxlength="5">
         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryEditForm.re_want_other_size_e.$valid"></span>

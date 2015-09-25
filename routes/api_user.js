@@ -3,7 +3,6 @@
  */
 
 var User = require('../models/User');
-var mailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var UserLog = require('../models/UserLog');
 var config = require('../configs/config');
@@ -17,7 +16,8 @@ function CreateToken(user)
     var token = jwt.sign(
         {
             id: user._id,
-            username: user.username,
+            //username: user.username,
+            admin:user.admin
         },
         secret_key,
         {
@@ -265,7 +265,7 @@ module.exports = function(app, express)
 
     api.post('/login', function(req,res)
     {
-        User.findOne({username:req.body.username}).select('password').exec(function(err,user)
+        User.findOne({username:req.body.username}).select('password admin').exec(function(err,user)
         {
             if(err)
             {

@@ -1,0 +1,132 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    <li ng-repeat="district in districts">
+                        <a href="javascript:void(0)" ng-click="removeQuery('region_district','district')" ng-if="district=='全部'">
+                            {{district}}
+                        </a>
+                        <a href="javascript:void(0)" ng-click="addQuery('region_district',district,'district','区/县')" ng-if="district!='全部'">
+                            {{district}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <ul class="list-inline col-md-12">
+                <li>
+                    <a href="javascript:void(0)" ng-click="removeQuery('desc.type','type')">全部</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.type','全职','type','类型')">全职</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.type','兼职','type','类型')">兼职</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.type','其他','type','类型')">其他</a>
+                </li>
+            </ul>
+        </div>
+        <hr/>
+        <div class="row">
+            <ul class="list-inline col-md-12">
+                <li>
+                    <a href="javascript:void(0)" ng-click="removeQuery('desc.salary','salary')">全部</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','面议','salary','工资')">面议</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','1000元以下','salary','工资')">1000元以下</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','1000-2000元','salary','工资')">1000-2000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','2000-3000元','salary','工资')">2000-3000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','3000-5000元','salary','工资')">3000-5000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','5000-8000元','salary','工资')">5000-8000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','8000-12000元','salary','工资')">8000-12000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','12000-20000元','salary','工资')">12000-20000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','20000-25000元','salary','工资')">20000-25000元</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.salary','25000元以上','salary','工资')">25000元以上</a>
+                </li>                
+            </ul>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-8 center-block">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="搜索想要的信息，关键词以空格隔开。最多30个字符。"
+                           ng-model="List.s_search" maxlength="30"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"
+                                    ng-click="addQuery_searchBar(['title'])">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr/>
+        <div class="row" ng-if="count_query_display>0">
+            <ul>当前筛选条件：
+                <li ng-repeat="cond in query_display">{{cond}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div ng-repeat="entry in entries">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <h4 class="text-left"><span class="glyphicon glyphicon-hand-right"></span></h4>
+                        </div>
+                        <div class="col-sm-11">
+                            <h4><a href="{{current_city}}/detail/{{entry._id}}" target="_blank">{{entry.title}}</a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-info-sign"></span></p>
+                        </div>
+                        <div class="col-sm-11">
+                            <p>{{entry.desc.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <p class="text-left"><span class="glyphicon glyphicon-map-marker"></span></p>
+                        </div>
+                        <p class="col-sm-11">{{entry.region_district}}，{{entry.region_addr}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center">{{entry.desc.salary}}</h4>
+                    <h4 class="text-center">{{entry.desc.type}}</h4>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>

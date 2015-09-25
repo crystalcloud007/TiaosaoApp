@@ -1,5 +1,105 @@
 <div class="panel panel-default">
     <div class="panel-body">
+        <div class="row">
+            <ul class="list-inline col-md-12">
+                <li>
+                    <a href="javascript:void(0)" ng-click="removeQuery('desc.aged','aged')">全部</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','全新未拆封','aged','状况')">全新未拆封</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','全新已拆封','aged','状况')">全新已拆封</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','95成新','aged','状况')">95成新</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','9成新','aged','状况')">9成新</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','8成新','aged','状况')">8成新</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" ng-click="addQuery('desc.aged','7成新及以下','aged','状况')">7成新及以下</a>
+                </li>
+            </ul>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="form_s_hand_other_price" role="form">
+                    <div class="form-group has-feedback">
+                        <div class="col-md-3">
+                            <input type="number" maxlength="5" ng-model="query_digit.price_low"
+                                   ng-pattern="/^[1-9][0-9]{1,4}$/" name="re_other_price_low"
+                                   ng-required="true" class="form-control input-sm">
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-if="form_s_hand_other_price.re_other_price_low.$valid"></span>
+                            <div class="help-block"
+                                 ng-if="(form_s_hand_other_price.re_other_price_low.$invalid&&
+                                 form_s_hand_other_price.re_other_price_low.$dirty)||
+                                (form_s_hand_other_price.re_other_price_high.$invalid&&
+                                form_s_hand_other_price.re_other_price_high.$dirty)||
+                                query_digit.price_high<query_digit.price_low">
+                                <p class="label label-warning">
+                                    2-5位数字。后面的数字要大于前面的数字。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-1"><h5 class="text-center">—</h5></div>
+                        <div class="col-md-3">
+                            <input type="number" maxlength="5" ng-model="query_digit.price_high"
+                                   ng-pattern="/^[1-9][0-9]{1,4}$/" name="re_other_price_high"
+                                   ng-required="true" class="form-control input-sm">
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="form_s_hand_other_price.re_other_price_high.$valid">
+                            </span>
+                        </div>
+                        <div class="col-md-2"><h5 class="text-left">元</h5></div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary btn-sm" ng-click="addQueryRange('desc.price',query_digit.price_low,query_digit.price_high,'price','价格','元')"
+                                    ng-if="form_s_hand_other_price.$valid&&query_digit.price_high>=query_digit.price_low">
+                                筛选
+                            </button>
+                            <button class="btn btn-primary btn-sm" ng-if="form_s_hand_other_price.$invalid||query_digit.price_high<query_digit.price_low" disabled>
+                                筛选
+                            </button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-default btn-sm" ng-click="removeQueryRange('desc.price','price_low','price_high','price')">
+                                不限
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-8 center-block">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="搜索想要的信息，关键词以空格隔开。最多30个字符。"
+                           ng-model="List.s_search" maxlength="30"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"
+                                    ng-click="addQuery_searchBar(['title'])">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr  ng-if="count_query_display>0"/>
+        <div class="row" ng-if="count_query_display>0">
+            <ul>当前筛选条件：
+                <li ng-repeat="cond in query_display">{{cond}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
         <div ng-repeat="entry in entries">
             <div class="row">
                 <div class="col-md-8">

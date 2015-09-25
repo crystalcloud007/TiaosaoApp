@@ -19,10 +19,10 @@ app.use(bodyparser.json());
 app.use(morgan('dev'));
 
 mongoose.connect(config.db, function(err)
-{
-    if(err) console.log(err);
-    else console.log('DB connection established');
-});
+    {
+        if(err) console.log(err);
+        else console.log('DB connection established');
+    });
 
 // Render public files
 app.use(express.static(__dirname + '/views'));
@@ -38,18 +38,20 @@ app.use(express.static(__dirname + '/views'));
     next();
 });*/
 
-// APP apis
+// APIs
 var user_api = require('./routes/api_user')(app ,express);
 var general_api = require('./routes/api_general')(app, express);
 var help_api = require('./routes/api_help')(app,express);
 var entry_api = require('./routes/api_entry')(app,express);
-//var admin_api = require('./routes/api_admin')(app, express);
+var admin_api = require('./routes/api_admin')(app, express);
+var ad_api = require('./routes/api_ad')(app, express);
 
 app.use('/api/user', user_api);
 app.use('/api/gen', general_api);
 app.use('/api/help', help_api);
 app.use('/api/entry', entry_api);
-//app.use('/api/admin', admin_api);
+app.use('/api/admin', admin_api);
+app.use('/api/ad',ad_api);
 
 
 // Send html file for home page

@@ -1,7 +1,10 @@
 <div class="container">
-    <div class="row" ng-if="phase==1">
-        <div class="col-md-2">广告</div>
-        <div class="col-md-8">
+    <div ng-include="'includes/ad_banner.html'"></div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" ng-if="phase==1">
             <h2 class="text-center">第一步 - 请选择类别</h2>
             <div class="panel panel-default" ng-repeat="item_main in menu">
                 <h4><strong>{{item_main.chn}}</strong></h4>
@@ -13,11 +16,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-2">广告</div>
-    </div>
-    <div class="row" ng-if="phase==2">
-        <div class="col-md-2">广告</div>
-        <div class="col-md-8">
+        <div class="col-md-8" ng-if="phase==2">
             <h2 class="text-center">
                 第二步 - 填写内容
                 <small><a href="javascript:void(0)" ng-click="toPhase_1()"> 回到上一步</a></small>
@@ -38,11 +37,11 @@
                 <div class="form-group has-feedback">
                     <label class="control-label col-md-2 text-left" for="title">标题：</label>
                     <div class="col-md-10">
-                        <input id="title" type="text" name="title" ng-model="entry.title" ng-pattern="/^[\s\S]{6,30}$/" ng-required="true"
+                        <input id="title" type="text" name="title" ng-model="entry.title" ng-pattern="/^[\s\S]{5,30}$/" ng-required="true"
                                class="form-control input-md" placeholder="请输入标题" maxlength="30">
                         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.title.$valid"></span>
                         <p ng-if="entryForm.title.$invalid&&entryForm.title.$dirty" class="help-block label label-warning">
-                            请输入标题，6-30个字符。
+                            请输入标题，5-30个字符。
                         </p>
                     </div>
                 </div>
@@ -55,11 +54,11 @@
                 <div class="form-group has-feedback">
                     <label class="control-label col-md-2 text-left" for="addr">详细地址：</label>
                     <div class="col-md-10">
-                        <input id="addr" type="text" name="r_addr" ng-model="entry.region_addr" ng-pattern="/^[\s\S]{6,40}$/" ng-required="true"
+                        <input id="addr" type="text" name="r_addr" ng-model="entry.region_addr" ng-pattern="/^[\s\S]{5,40}$/" ng-required="true"
                                class="form-control input-md" placeholder="请输入具体地址，或XX市XX区/县，或XX地区周边" maxlength="40">
                         <span class="glyphicon glyphicon-ok form-control-feedback" ng-if="entryForm.r_addr.$valid"></span>
                         <p ng-if="entryForm.r_addr.$invalid&&entryForm.r_addr.$dirty" class="help-block label label-warning">
-                            请输入详细地址，6-40个字符。
+                            请输入详细地址，5-40个字符。
                         </p>
                     </div>
                 </div>
@@ -102,8 +101,8 @@
                 <div class="form-group" ng-if="loggedIn">
                     <div class="col-md-2"></div>
                     <div class="col-md-10">
-                        <button ng-if="entryForm.$invalid" disabled class="btn btn-primary">提交</button>
-                        <button ng-click="postEntry()" ng-if="entryForm.$valid" class="btn btn-primary">提交</button>
+                        <button ng-if="entryForm.$invalid||uploading" disabled class="btn btn-primary">提交</button>
+                        <button ng-click="postEntry()" ng-if="entryForm.$valid&&!uploading" class="btn btn-primary">提交</button>
                     </div>
                 </div>
             </form>
@@ -119,21 +118,22 @@
                 <div ng-include="'includes/login_and_signup.html'"></div>
             </div>
         </div>
-        <div class="col-md-2">广告</div>
-    </div>
-    <div class="row" ng-if="phase==3">
-        <div class="col-md-2">广告</div>
-        <div class="col-md-8">
+        <!--div class="col-md-8" ng-if="phase==3">
             <h2 class="text-center">第三步-信息发布成功</h2>
-            <form class="form form-horizontal" role="form">
+            <form class="form form-horizontal" role="form" name="pic_form">
                 <div class="form-group">
                     <label class="label control-label col-md-4" for="upload_pic">上传图片</label>
-                    <input id="upload_pic" type="file" class="input-file">
+                    <input id="upload_pic" type="file" class="input-file" ng-required="true">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <button class="btn btn-primary" ng-if="pic_form.$valid">上传</button>
+                    <button class="btn btn-primary" ng-if="pic_form.$invalid" disabled>上传</button>
                 </div>
             </form>
             <hr/>
             <p><a href="/{{current_city}}/detail/{{entry_id}}">点击查看帖子</a></p>
-        </div>
-        <div class="col-md-2">广告</div>
+        </div-->
+        <div class="col-md-2"></div>
     </div>
 </div>

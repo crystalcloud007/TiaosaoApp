@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-repeat="prov in LocationList.locations">
+                <ul class="list-inline">
+                    <li>
+                        <h4><strong>{{prov.chn}}：</strong></h4>
+                    </li>
+                    <li ng-repeat="city in prov.cities">
+                        <a href="/{{city.index}}">{{city.chn}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
